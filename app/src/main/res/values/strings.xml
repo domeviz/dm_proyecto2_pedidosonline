@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">DM_Proyecto2_PedidosOnline</string>
+    <string name="titulo">Pedidos Online</string>
+    <string name="saludo">¡Hola! Es bueno verte nuevamente</string>
+    <string name="correo">Correo</string>
+    <string name="correoEjemplo">example@email.com</string>
+    <string name="password">Contraseña</string>
+    <string name="botonIngresar">Ingresar</string>
+    <string name="conectese">O conéctese usando las redes sociales</string>
+    <string name="olvidoPassword">¿Olvidó su contraseña?</string>
+    <string name="registrese">Registrese</string>
+</resources>
