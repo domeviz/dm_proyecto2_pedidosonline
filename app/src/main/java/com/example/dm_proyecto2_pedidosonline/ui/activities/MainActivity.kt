@@ -34,8 +34,7 @@ class MainActivity : AppCompatActivity() {
             if (check){
                 var intent = Intent(this,SegundaActivity::class.java
                 )
-                intent.putExtra("var1","UCE")
-                intent.putExtra("var2",binding.correoEjemplo.text.toString())
+                intent.putExtra("var1",binding.correoEjemplo.text.toString())
                 startActivity(intent)
             }
             else {

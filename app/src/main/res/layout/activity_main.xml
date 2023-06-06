@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     tools:context=".ui.activities.MainActivity">
 
     <ImageView
@@ -22,61 +21,70 @@
     <TextView
         android:id="@+id/titulo"
         style="@style/styleTitulo"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="@dimen/marginStartEnd"
         android:layout_marginTop="15dp"
+        android:layout_marginEnd="71dp"
         android:text="@string/titulo"
         android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <TextView
-        style="@style/styleTexto"
         android:id="@+id/saludo"
-        android:layout_width="wrap_content"
+        style="@style/styleTexto"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="@dimen/marginStartEnd"
         android:layout_marginTop="15dp"
+        android:layout_marginEnd="71dp"
         android:text="@string/saludo"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titulo" />
 
     <TextView
         android:id="@+id/correo"
-        android:layout_width="wrap_content"
+        style="@style/styleSubtitulo"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="71dp"
         android:text="@string/correo"
-        android:textColor="@color/red"
-        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/saludo" />
 
     <EditText
-        style="@style/styleTexto"
         android:id="@+id/correoEjemplo"
+        style="@style/styleTexto"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="15dp"
+        android:layout_marginEnd="71dp"
         android:ems="10"
-        android:textColorHint="#393737"
         android:hint="@string/correoEjemplo"
         android:inputType="textPersonName"
+        android:textColorHint="#808080"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/correo" />
 
     <EditText
-        style="@style/styleTexto"
         android:id="@+id/correoPassword"
+        style="@style/styleTexto"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="15dp"
+        android:layout_marginEnd="71dp"
         android:ems="10"
         android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password" />
 
@@ -86,58 +94,52 @@
         android:layout_height="50dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="71dp"
         android:backgroundTint="@color/red"
-        android:textColor="@color/white"
+        android:drawableLeft="@drawable/twitter30"
         android:text="@string/botonIngresar"
         android:textAllCaps="false"
+        android:textColor="@color/white"
         app:cornerRadius="10dp"
         app:iconTint="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/correoPassword" />
 
     <TextView
-        style="@style/styleTexto"
         android:id="@+id/conectese"
-        android:layout_width="wrap_content"
+        style="@style/styleTexto"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="71dp"
         android:text="@string/conectese"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/botonIngresar" />
 
     <TextView
-        style="@style/styleTexto"
         android:id="@+id/olvidoPassword"
+        style="@style/styleTexto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="25dp"
         android:text="@string/olvidoPassword"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageButton6" />
 
     <TextView
-        android:id="@+id/registrese"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="89dp"
-        android:layout_marginTop="15dp"
-        android:text="@string/registrese"
-        android:textColor="@android:color/holo_red_light"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/olvidoPassword"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton5" />
-
-    <TextView
         android:id="@+id/password"
-        android:layout_width="wrap_content"
+        style="@style/styleSubtitulo"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="71dp"
         android:text="@string/password"
-        android:textColor="@color/red"
-        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/correoEjemplo" />
 
@@ -147,7 +149,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="71dp"
         android:backgroundTint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageButton6"
         app:layout_constraintTop_toBottomOf="@+id/conectese"
         app:srcCompat="@drawable/fblogin" />
@@ -162,4 +166,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/conectese"
         app:srcCompat="@drawable/twtlogin" />
+
+    <Button
+        android:id="@+id/button"
+        style="@style/styleSubtitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="84dp"
+        android:backgroundTint="@color/white"
+        android:text="@string/registrese"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/olvidoPassword"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton5" />
 </androidx.constraintlayout.widget.ConstraintLayout>
