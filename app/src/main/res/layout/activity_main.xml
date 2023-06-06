@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:background="@color/white"
+    tools:context=".ui.activities.MainActivity">
 
     <ImageView
         android:id="@+id/imageView"
@@ -20,17 +21,18 @@
 
     <TextView
         android:id="@+id/titulo"
+        style="@style/styleTitulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="15dp"
         android:text="@string/titulo"
         android:textSize="24sp"
-        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <TextView
+        style="@style/styleTexto"
         android:id="@+id/saludo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -53,19 +55,22 @@
         app:layout_constraintTop_toBottomOf="@+id/saludo" />
 
     <EditText
+        style="@style/styleTexto"
         android:id="@+id/correoEjemplo"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="15dp"
         android:ems="10"
+        android:textColorHint="#393737"
         android:hint="@string/correoEjemplo"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/correo" />
 
     <EditText
-        android:id="@+id/editTextTextPassword"
+        style="@style/styleTexto"
+        android:id="@+id/correoPassword"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
@@ -82,13 +87,16 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="20dp"
         android:backgroundTint="@color/red"
+        android:textColor="@color/white"
         android:text="@string/botonIngresar"
         android:textAllCaps="false"
         app:cornerRadius="10dp"
+        app:iconTint="#FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/correoPassword" />
 
     <TextView
+        style="@style/styleTexto"
         android:id="@+id/conectese"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -99,6 +107,7 @@
         app:layout_constraintTop_toBottomOf="@+id/botonIngresar" />
 
     <TextView
+        style="@style/styleTexto"
         android:id="@+id/olvidoPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
