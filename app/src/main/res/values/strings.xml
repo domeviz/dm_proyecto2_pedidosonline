@@ -10,4 +10,7 @@
     <string name="olvidoPassword">¿Olvidó su contraseña?</string>
     <string name="registrese">Registrese</string>
     <string name="regresar">Regresar</string>
+    <string name="inicio">Inicio</string>
+    <string name="favoritos">Favoritos</string>
+    <string name="chatgpt">Chat GPT</string>
 </resources>
