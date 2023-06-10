@@ -13,4 +13,6 @@
     <string name="inicio">Inicio</string>
     <string name="favoritos">Favoritos</string>
     <string name="chatgpt">Chat GPT</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import com.example.dm_proyecto2_pedidosonline.R
 import com.example.dm_proyecto2_pedidosonline.databinding.ActivitySegundaBinding
+import com.example.dm_proyecto2_pedidosonline.ui.fragment.FirstFragment
 import com.google.android.material.snackbar.Snackbar
 
 class SegundaActivity : AppCompatActivity() {
@@ -46,10 +47,16 @@ class SegundaActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.inicio -> {
                     // Respond to navigation item 1 click
-                    Snackbar.make(
-                        binding.bottomNavigation, "Holi",
-                        Snackbar.LENGTH_LONG
-                    ).show()
+                    val frag=FirstFragment()
+                    val transaction=supportFragmentManager.beginTransaction()
+                    //replace: para reemplazar el contenido de ese lugar
+                    //add: se agrega informacion encima de la otra
+                    //Cada click aqui se agrega a la pila de navegacion
+                    transaction.add(binding.frmContainer.id,frag)
+                    //Para que funcione el boton de back del celular
+                    //Regresa cada una de las agregaciones a la pila
+                    transaction.addToBackStack(null)
+                    transaction.commit()
                     true
                 }
 
