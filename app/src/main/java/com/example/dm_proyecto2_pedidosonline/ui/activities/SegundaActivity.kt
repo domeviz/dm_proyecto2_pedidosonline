@@ -7,6 +7,8 @@ import android.util.Log
 import com.example.dm_proyecto2_pedidosonline.R
 import com.example.dm_proyecto2_pedidosonline.databinding.ActivitySegundaBinding
 import com.example.dm_proyecto2_pedidosonline.ui.fragment.FirstFragment
+import com.example.dm_proyecto2_pedidosonline.ui.fragment.SecondFragment
+import com.example.dm_proyecto2_pedidosonline.ui.fragment.ThirdFragment
 import com.google.android.material.snackbar.Snackbar
 
 class SegundaActivity : AppCompatActivity() {
@@ -52,7 +54,7 @@ class SegundaActivity : AppCompatActivity() {
                     //replace: para reemplazar el contenido de ese lugar
                     //add: se agrega informacion encima de la otra
                     //Cada click aqui se agrega a la pila de navegacion
-                    transaction.add(binding.frmContainer.id,frag)
+                    transaction.replace(binding.frmContainer.id,frag)
                     //Para que funcione el boton de back del celular
                     //Regresa cada una de las agregaciones a la pila
                     transaction.addToBackStack(null)
@@ -62,19 +64,21 @@ class SegundaActivity : AppCompatActivity() {
 
                 R.id.fav -> {
                     // Respond to navigation item 2 click
-                    var suma:Int=0
-                    for(i in listOf(9,2,3)){
-                        suma+=i
-                    }
-                    Snackbar.make(
-                        binding.bottomNavigation, "La suma es ${suma}",
-                        Snackbar.LENGTH_LONG
-                    ).show()
+                    val frag=SecondFragment()
+                    val transaction=supportFragmentManager.beginTransaction()
+                    transaction.replace(binding.frmContainer.id,frag)
+                    transaction.addToBackStack(null)
+                    transaction.commit()
                     true
                 }
 
                 R.id.api -> {
                     // Respond to navigation item 3 click
+                    val frag=ThirdFragment()
+                    val transaction=supportFragmentManager.beginTransaction()
+                    transaction.replace(binding.frmContainer.id,frag)
+                    transaction.addToBackStack(null)
+                    transaction.commit()
                     true
                 }
 
