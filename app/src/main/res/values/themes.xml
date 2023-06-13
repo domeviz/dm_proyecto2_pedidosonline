@@ -24,4 +24,7 @@
     <style name="styleTexto">
         <item name="android:textColor">@color/black</item>
     </style>
+    <style name="ActiveIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">#D08DDB</item>
+    </style>
 </resources>

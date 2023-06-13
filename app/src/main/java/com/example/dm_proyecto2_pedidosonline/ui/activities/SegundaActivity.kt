@@ -9,6 +9,7 @@ import com.example.dm_proyecto2_pedidosonline.databinding.ActivitySegundaBinding
 import com.example.dm_proyecto2_pedidosonline.ui.fragment.FirstFragment
 import com.example.dm_proyecto2_pedidosonline.ui.fragment.SecondFragment
 import com.example.dm_proyecto2_pedidosonline.ui.fragment.ThirdFragment
+import com.example.dm_proyecto2_pedidosonline.ui.utilities.FragmentsManager
 import com.google.android.material.snackbar.Snackbar
 
 class SegundaActivity : AppCompatActivity() {
@@ -48,37 +49,29 @@ class SegundaActivity : AppCompatActivity() {
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.inicio -> {
-                    // Respond to navigation item 1 click
-                    val frag=FirstFragment()
-                    val transaction=supportFragmentManager.beginTransaction()
-                    //replace: para reemplazar el contenido de ese lugar
-                    //add: se agrega informacion encima de la otra
-                    //Cada click aqui se agrega a la pila de navegacion
-                    transaction.replace(binding.frmContainer.id,frag)
-                    //Para que funcione el boton de back del celular
-                    //Regresa cada una de las agregaciones a la pila
-                    transaction.addToBackStack(null)
-                    transaction.commit()
+                    FragmentsManager().replaceFragment(
+                        supportFragmentManager,
+                        binding.frmContainer.id,
+                        FirstFragment()
+                    )
                     true
                 }
 
                 R.id.fav -> {
-                    // Respond to navigation item 2 click
-                    val frag=SecondFragment()
-                    val transaction=supportFragmentManager.beginTransaction()
-                    transaction.replace(binding.frmContainer.id,frag)
-                    transaction.addToBackStack(null)
-                    transaction.commit()
+                    FragmentsManager().replaceFragment(
+                        supportFragmentManager,
+                        binding.frmContainer.id,
+                        SecondFragment()
+                    )
                     true
                 }
 
                 R.id.api -> {
-                    // Respond to navigation item 3 click
-                    val frag=ThirdFragment()
-                    val transaction=supportFragmentManager.beginTransaction()
-                    transaction.replace(binding.frmContainer.id,frag)
-                    transaction.addToBackStack(null)
-                    transaction.commit()
+                    FragmentsManager().replaceFragment(
+                        supportFragmentManager,
+                        binding.frmContainer.id,
+                        ThirdFragment()
+                    )
                     true
                 }
 
