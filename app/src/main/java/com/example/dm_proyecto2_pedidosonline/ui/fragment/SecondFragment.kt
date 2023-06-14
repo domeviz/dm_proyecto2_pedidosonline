@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.dm_proyecto2_pedidosonline.R
+import com.example.dm_proyecto2_pedidosonline.data.entities.MarvelHero
 import com.example.dm_proyecto2_pedidosonline.databinding.FragmentFirstBinding
 import com.example.dm_proyecto2_pedidosonline.databinding.FragmentSecondBinding
 
@@ -25,5 +26,10 @@ class SecondFragment : Fragment() {
         binding= FragmentSecondBinding.inflate(layoutInflater,container,false)
         // Inflate the layout for this fragment
         return binding.root
+    }
+
+    override fun onStart() {
+        super.onStart()
+
     }
 }

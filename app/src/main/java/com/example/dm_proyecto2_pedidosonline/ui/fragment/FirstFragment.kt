@@ -35,7 +35,7 @@ class FirstFragment : Fragment() {
             R.layout.simple_spinner,
             names
         )
-        binding.spinner.adapter=adapter
+
         //binding.listView.adapter=adapter
 
     }
