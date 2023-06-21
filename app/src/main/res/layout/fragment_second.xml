@@ -7,31 +7,30 @@
     android:background="@color/purple_500"
     tools:context=".ui.fragment.SecondFragment">
 
-    <androidx.cardview.widget.CardView
+    <Spinner
+        android:id="@+id/spinn"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:elevation="10dp"
-        android:layout_margin="35dp"
-        app:cardCornerRadius="12dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="match_parent"
+        android:layout_margin="25dp"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="MissingConstraints" >
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
-        <ImageView
-            android:id="@+id/eva"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:src="@drawable/eva" />
+    <LinearLayout
+        android:id="@+id/list2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="25dp"
+        android:layout_marginTop="76dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinn">
 
-        <TextView
-            android:id="@+id/texto2"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/listaMarvel"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fontFamily="sans-serif-black"
-            android:gravity="bottom|center_horizontal"
-            android:text="Mi segundo Fragment"
-            android:textSize="42sp" />
-    </androidx.cardview.widget.CardView>
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
