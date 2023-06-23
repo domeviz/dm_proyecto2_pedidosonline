@@ -9,6 +9,8 @@ import com.example.dm_proyecto2_pedidosonline.Logic.lists.listItems
 import com.example.dm_proyecto2_pedidosonline.R
 import com.example.dm_proyecto2_pedidosonline.data.entities.marvel.MarvelChars
 import com.example.dm_proyecto2_pedidosonline.databinding.MarvelCharactersBinding
+import com.google.android.material.snackbar.Snackbar
+import com.squareup.picasso.Picasso
 
 class MarvelAdapter(private val items: List<MarvelChars>) :
     RecyclerView.Adapter<MarvelAdapter.MarvelViewHolder>() {
@@ -16,6 +18,18 @@ class MarvelAdapter(private val items: List<MarvelChars>) :
         private val binding:MarvelCharactersBinding=MarvelCharactersBinding.bind(view)
         fun render(item: MarvelChars){
             println("Recibiendo a ${item.nombre}")
+            binding.txtTitulo.text = item.nombre
+            binding.txtComic.text=item.comic
+            Picasso.get().load(item.imagen).into(binding.imgMarvel)
+
+            binding.imgMarvel.setOnClickListener {
+                Snackbar.make(
+                    binding.imgMarvel,
+                    item.nombre,
+                    Snackbar.LENGTH_SHORT
+                )
+                    .show()
+            }
         }
     }
 

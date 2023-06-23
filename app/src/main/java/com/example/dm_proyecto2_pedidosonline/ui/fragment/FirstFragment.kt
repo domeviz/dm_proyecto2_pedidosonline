@@ -8,6 +8,9 @@ import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import com.example.dm_proyecto2_pedidosonline.R
 import com.example.dm_proyecto2_pedidosonline.databinding.FragmentFirstBinding
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.dm_proyecto2_pedidosonline.Logic.lists.listItems
+import com.example.dm_proyecto2_pedidosonline.ui.adapters.MarvelAdapter
 
 /**
  * A simple [Fragment] subclass.
@@ -29,7 +32,7 @@ class FirstFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        val names= arrayListOf<String>("Rosa","Pepe","Antonio","Carlos","Juan","Xavier", "Andres")
+        val names= arrayListOf<String>("Spiderman","Invisible Woman","Eternity","Black Widow")
         val adapter=ArrayAdapter<String>(
             requireActivity(),
             R.layout.simple_spinner,
@@ -37,6 +40,11 @@ class FirstFragment : Fragment() {
         )
         binding.spinner.adapter=adapter
         //binding.listView.adapter=adapter
+        val rvAdapter= MarvelAdapter(listItems().returnMarvelChars())
+        val rvMarvel =binding.rvMarvelChars
+        rvMarvel.adapter=rvAdapter
+        rvMarvel.layoutManager= LinearLayoutManager(requireActivity(),LinearLayoutManager.VERTICAL,false
+        )
 
     }
 
