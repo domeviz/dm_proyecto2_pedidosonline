@@ -1,5 +1,6 @@
 package com.example.dm_proyecto2_pedidosonline.ui.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,8 @@ import com.example.dm_proyecto2_pedidosonline.R
 import com.example.dm_proyecto2_pedidosonline.databinding.FragmentFirstBinding
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dm_proyecto2_pedidosonline.Logic.lists.listItems
+import com.example.dm_proyecto2_pedidosonline.data.entities.marvel.MarvelChars
+import com.example.dm_proyecto2_pedidosonline.ui.activities.DetailsMarvelItem
 import com.example.dm_proyecto2_pedidosonline.ui.adapters.MarvelAdapter
 
 /**
@@ -32,20 +35,36 @@ class FirstFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        val names= arrayListOf<String>("Spiderman","Invisible Woman","Eternity","Black Widow")
-        val adapter=ArrayAdapter<String>(
+        val names = arrayListOf<String>("Spiderman", "Invisible Woman", "Eternity", "Black Widow")
+        val adapter = ArrayAdapter<String>(
             requireActivity(),
             R.layout.simple_spinner,
             names
         )
-        binding.spinner.adapter=adapter
+        binding.spinner.adapter = adapter
         //binding.listView.adapter=adapter
-        val rvAdapter= MarvelAdapter(listItems().returnMarvelChars())
-        val rvMarvel =binding.rvMarvelChars
-        rvMarvel.adapter=rvAdapter
-        rvMarvel.layoutManager= LinearLayoutManager(requireActivity(),LinearLayoutManager.VERTICAL,false
-        )
 
+        binding.rvSwipe.setOnRefreshListener {
+            chargeDataRV()
+            binding.rvSwipe.isRefreshing=false
+        }
     }
 
-}
+        fun sendMarvelItems(item: MarvelChars){
+            val i = Intent(requireActivity(), DetailsMarvelItem::class.java)
+            startActivity(i);
+        }
+
+
+        fun chargeDataRV(){
+            val rvAdapter= MarvelAdapter(
+                listItems().returnMarvelChars(),
+
+                ){sendMarvelItems(it)}
+
+            val rvMarvel =binding.rvMarvelChars
+            rvMarvel.adapter=rvAdapter
+            rvMarvel.layoutManager= LinearLayoutManager(requireActivity(),LinearLayoutManager.VERTICAL,false
+            )
+        }
+    }
