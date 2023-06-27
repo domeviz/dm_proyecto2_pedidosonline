@@ -1,7 +1,7 @@
 package com.example.dm_proyecto2_pedidosonline.Logic.lists
 
 import com.example.dm_proyecto1_foodapp.data.entities.LoginUser
-import com.example.dm_proyecto2_pedidosonline.data.entities.marvel.MarvelChars
+import com.example.dm_proyecto2_pedidosonline.data.entities.marvel.characters.MarvelChars
 
 class listItems {
 

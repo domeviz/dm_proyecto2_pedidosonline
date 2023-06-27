@@ -1,15 +1,12 @@
 package com.example.dm_proyecto2_pedidosonline.ui.adapters
 
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.dm_proyecto2_pedidosonline.Logic.lists.listItems
 import com.example.dm_proyecto2_pedidosonline.R
-import com.example.dm_proyecto2_pedidosonline.data.entities.marvel.MarvelChars
+import com.example.dm_proyecto2_pedidosonline.data.entities.marvel.characters.MarvelChars
 import com.example.dm_proyecto2_pedidosonline.databinding.MarvelCharactersBinding
-import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 
 class MarvelAdapter(private val items: List<MarvelChars>, private var fnClick:(MarvelChars) -> Unit) :

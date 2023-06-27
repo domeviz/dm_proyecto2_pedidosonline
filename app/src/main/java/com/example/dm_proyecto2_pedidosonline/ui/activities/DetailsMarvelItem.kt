@@ -2,10 +2,7 @@ package com.example.dm_proyecto2_pedidosonline.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.dm_proyecto2_pedidosonline.R
-import com.example.dm_proyecto2_pedidosonline.data.entities.marvel.MarvelChars
 import com.example.dm_proyecto2_pedidosonline.databinding.ActivityDetailsMarvelItemBinding
-import com.squareup.picasso.Picasso
 
 class DetailsMarvelItem : AppCompatActivity() {
 

@@ -2,21 +2,23 @@ package com.example.dm_proyecto2_pedidosonline.Logic
 
 import com.example.dm_proyecto2_pedidosonline.data.connections.ApiConnection
 import com.example.dm_proyecto2_pedidosonline.data.endpoints.JikanEndpoint
-import com.example.dm_proyecto2_pedidosonline.data.entities.marvel.MarvelChars
+import com.example.dm_proyecto2_pedidosonline.data.entities.marvel.characters.MarvelChars
 
 class JikanAnimeLogic {
-    suspend fun getAllAnimes():List<MarvelChars>{
-        val call=ApiConnection.getJikanConnection()
+    suspend fun getAllAnimes(): List<MarvelChars> {
+        var itemList = arrayListOf<MarvelChars>()
+        val call = ApiConnection.getService(
+            ApiConnection.TypeApi.Jikan,
+            JikanEndpoint::class.java)
         //Sobre la url base creo el endpoint
-        val response=call.create(JikanEndpoint::class.java).getAllAnimes()
-        var itemList= arrayListOf<MarvelChars>()
-        if(response.isSuccessful){
+        val response = call.getAllAnimes()
+
+        if (response.isSuccessful) {
             //La data es un listado que vamos a recorrer
-            response.body()!!.data.forEach(){
-                val m=MarvelChars(it.mal_id,
-                it.title,
-                it.images.jpg.image_url,
-                it.titles[0].title)
+            response.body()!!.data.forEach() {
+                val m = MarvelChars(
+                    it.mal_id, it.title, it.titles[0].title, it.images.jpg.image_url
+                )
                 itemList.add(m)
             }
         }
