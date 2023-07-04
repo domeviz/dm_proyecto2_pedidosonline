@@ -28,13 +28,13 @@ class SegundaActivity : AppCompatActivity() {
 //        intent.extras.let{
 //            name=it?.getString("var1")!!
 //        }
-        Log.d("UCE", "Hola ${name}")
-        binding.textView.text = "Bienvenida " + name.toString()
-        Log.d("UCE", "Entrando a Start")
-        binding.back.setOnClickListener {
-            var intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }
+//        Log.d("UCE", "Hola ${name}")
+//        binding.textView.text = "Bienvenida " + name.toString()
+//        Log.d("UCE", "Entrando a Start")
+//        binding.back.setOnClickListener {
+//            var intent = Intent(this, MainActivity::class.java)
+//            startActivity(intent)
+//        }
         initClass()
     }
 
@@ -44,7 +44,7 @@ class SegundaActivity : AppCompatActivity() {
                 this,
                 MainActivity::class.java
             )
-            startActivity(intent)
+
         }
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
@@ -78,5 +78,6 @@ class SegundaActivity : AppCompatActivity() {
                 else -> false
             }
         }
+        startActivity(intent)
     }
 }

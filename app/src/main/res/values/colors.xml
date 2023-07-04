@@ -8,4 +8,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="red">#F44336</color>
+    <color name="rosa">#ffc8dd</color>
+    <color name="celeste">#bde0fe</color>
+    <color name="morado">#cdb4db</color>
+    <color name="rosa2">#ffafcc</color>
+    <color name="celeste2">#a2d2ff</color>
 </resources>

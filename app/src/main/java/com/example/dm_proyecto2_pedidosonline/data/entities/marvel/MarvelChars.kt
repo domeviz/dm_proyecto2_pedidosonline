@@ -4,4 +4,10 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class MarvelChars(val id:Int,val nombre:String, val comic:String, val imagen:String):Parcelable
+data class MarvelChars(
+    val id: Int,
+    val nombre: String,
+    val comic: String,
+    val imagen: String
+) :
+    Parcelable

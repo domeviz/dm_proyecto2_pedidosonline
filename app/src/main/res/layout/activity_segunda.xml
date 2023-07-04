@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.activities.SegundaActivity">
 
     <TextView
@@ -11,20 +12,23 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="171dp"
-        android:layout_marginTop="49dp"
-        android:layout_marginEnd="182dp"
+        android:layout_marginStart="190dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="160dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/back"
+        style="@style/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="149dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="170dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="150dp"
         android:backgroundTint="@color/red"
         android:text="@string/regresar"
         android:textAllCaps="false"
@@ -49,6 +53,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_navigation_menu"
         app:itemIconTint="@drawable/cualquiera"
         app:itemActiveIndicatorStyle="@style/ActiveIndicator"

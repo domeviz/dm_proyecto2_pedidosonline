@@ -21,13 +21,13 @@ private const val ARG_PARAM2 = "param2"
  */
 class ThirdFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private lateinit var binding : FragmentThirdBinding
+    private lateinit var binding: FragmentThirdBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding= FragmentThirdBinding.inflate(layoutInflater,container,false)
+        binding = FragmentThirdBinding.inflate(layoutInflater, container, false)
         // Inflate the layout for this fragment
         return binding.root
     }

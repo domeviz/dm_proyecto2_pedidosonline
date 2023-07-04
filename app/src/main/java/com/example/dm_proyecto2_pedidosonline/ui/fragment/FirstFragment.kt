@@ -22,13 +22,13 @@ import com.example.dm_proyecto2_pedidosonline.ui.adapters.MarvelAdapter
  */
 class FirstFragment : Fragment() {
 
-    private lateinit var binding :FragmentFirstBinding
+    private lateinit var binding: FragmentFirstBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding= FragmentFirstBinding.inflate(layoutInflater,container,false)
+        binding = FragmentFirstBinding.inflate(layoutInflater, container, false)
         // Inflate the layout for this fragment
         return binding.root
     }
@@ -46,25 +46,27 @@ class FirstFragment : Fragment() {
 
         binding.rvSwipe.setOnRefreshListener {
             chargeDataRV()
-            binding.rvSwipe.isRefreshing=false
+            binding.rvSwipe.isRefreshing = false
         }
     }
 
-        fun sendMarvelItems(item: MarvelChars){
-            val i = Intent(requireActivity(), DetailsMarvelItem::class.java)
-            startActivity(i);
-        }
-
-
-        fun chargeDataRV(){
-            val rvAdapter= MarvelAdapter(
-                listItems().returnMarvelChars(),
-
-                ){sendMarvelItems(it)}
-
-            val rvMarvel =binding.rvMarvelChars
-            rvMarvel.adapter=rvAdapter
-            rvMarvel.layoutManager= LinearLayoutManager(requireActivity(),LinearLayoutManager.VERTICAL,false
-            )
-        }
+    fun sendMarvelItems(item: MarvelChars) {
+        val i = Intent(requireActivity(), DetailsMarvelItem::class.java)
+        i.putExtra("name",item)
+        startActivity(i);
     }
+
+
+    fun chargeDataRV() {
+        val rvAdapter = MarvelAdapter(
+            listItems().returnMarvelChars(),
+
+            ) { sendMarvelItems(it) }
+
+        val rvMarvel = binding.rvMarvelChars
+        rvMarvel.adapter = rvAdapter
+        rvMarvel.layoutManager = LinearLayoutManager(
+            requireActivity(), LinearLayoutManager.VERTICAL, false
+        )
+    }
+}

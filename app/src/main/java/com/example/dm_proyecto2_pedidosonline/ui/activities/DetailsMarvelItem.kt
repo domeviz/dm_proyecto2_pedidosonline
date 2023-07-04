@@ -13,28 +13,18 @@ class DetailsMarvelItem : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding= ActivityDetailsMarvelItemBinding.inflate(layoutInflater)
+        binding = ActivityDetailsMarvelItemBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
 
     override fun onStart() {
         super.onStart()
-        /*
-        var name : String?=""
-        intent.extras?.let{
-             name =it.getString("name")
+        val item = intent.getParcelableExtra<MarvelChars>("name")
+        if (item != null) {
+            binding.textoCentrado.text = item.nombre
+            binding.txtComic.text = item.comic
+
+            Picasso.get().load(item.imagen).into(binding.imgPersonaje)
         }
-        if (!name.isNullOrEmpty()){
-            binding.textoCentrado.text=name
-        }
-
-        val item=intent.getParcelableExtra<MarvelChars>("name")
-        if (item!= null){
-            binding.textoCentrado.text=item.nombre
-            binding.txtComic.text=item.comic
-
-            Picasso.get().load(item.image).into(binding.imgPersonaje)
-
-         */
     }
 }

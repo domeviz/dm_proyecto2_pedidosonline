@@ -13,7 +13,6 @@ import android.util.Log
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    @SuppressLint("MissingInflatedId")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +23,10 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         initClass()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
     }
     private fun initClass() {
         binding.botonIngresar.setOnClickListener {

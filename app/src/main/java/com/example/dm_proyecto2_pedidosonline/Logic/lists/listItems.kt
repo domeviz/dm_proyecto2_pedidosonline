@@ -32,7 +32,7 @@ class listItems {
             MarvelChars(
                 3,
                 "Eternity",
-                "Strange Tales #138",
+                "Strange Tales (1965)",
                 "https://comicvine.gamespot.com/a/uploads/scale_small/10/105264/6154236-eternity%20universe.jpg"
             ),
             MarvelChars(
