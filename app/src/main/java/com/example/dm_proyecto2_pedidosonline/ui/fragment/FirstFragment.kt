@@ -7,13 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.example.dm_proyecto2_pedidosonline.R
 import com.example.dm_proyecto2_pedidosonline.databinding.FragmentFirstBinding
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.dm_proyecto2_pedidosonline.Logic.jikanLogic.JikanAnimeLogic
 import com.example.dm_proyecto2_pedidosonline.Logic.lists.listItems
 import com.example.dm_proyecto2_pedidosonline.data.entities.marvel.MarvelChars
 import com.example.dm_proyecto2_pedidosonline.ui.activities.DetailsMarvelItem
 import com.example.dm_proyecto2_pedidosonline.ui.adapters.MarvelAdapter
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * A simple [Fragment] subclass.
@@ -56,17 +61,22 @@ class FirstFragment : Fragment() {
         startActivity(i);
     }
 
-
     fun chargeDataRV() {
-        val rvAdapter = MarvelAdapter(
-            listItems().returnMarvelChars(),
-
+        lifecycleScope.launch(Dispatchers.IO) {
+            val x = JikanAnimeLogic().getAllAnimes()
+            val rvAdapter = MarvelAdapter(
+                x
             ) { sendMarvelItems(it) }
 
-        val rvMarvel = binding.rvMarvelChars
-        rvMarvel.adapter = rvAdapter
-        rvMarvel.layoutManager = LinearLayoutManager(
-            requireActivity(), LinearLayoutManager.VERTICAL, false
-        )
+            withContext(Dispatchers.Main) {
+                with(binding.rvMarvelChars) {
+                    this.adapter = rvAdapter
+                    this.layoutManager = LinearLayoutManager(
+                        requireActivity(), LinearLayoutManager.VERTICAL, false
+                    )
+                }
+            }
+        }
     }
+
 }
