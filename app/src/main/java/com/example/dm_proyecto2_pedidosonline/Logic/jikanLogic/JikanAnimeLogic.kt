@@ -16,7 +16,8 @@ class JikanAnimeLogic {
             response.body()!!.data.forEach(){
                 val m=MarvelChars(it.mal_id,
                     it.title,
-                    it.titles[0].title,
+                    it.duration,
+                    it.synopsis,
                     it.images.jpg.image_url
                     )
                 itemList.add(m)

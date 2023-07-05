@@ -8,6 +8,7 @@ data class MarvelChars(
     val id: Int,
     val nombre: String,
     val comic: String,
+    val descripcion: String,
     val imagen: String
 ) :
     Parcelable
