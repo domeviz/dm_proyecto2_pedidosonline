@@ -1,5 +1,6 @@
 package com.example.dm_proyecto2_pedidosonline.ui.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -23,6 +24,7 @@ class MarvelAdapter(
             binding.txtTitulo.text = item.nombre
             binding.txtComic.text = item.comic
             Picasso.get().load(item.imagen).into(binding.imgMarvel)
+            Log.d("PICASSO",item.imagen)
 
             itemView.setOnClickListener {
                 fnClick(item)

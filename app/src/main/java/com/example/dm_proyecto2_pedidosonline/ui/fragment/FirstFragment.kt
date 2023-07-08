@@ -13,6 +13,7 @@ import com.example.dm_proyecto2_pedidosonline.databinding.FragmentFirstBinding
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dm_proyecto2_pedidosonline.Logic.jikanLogic.JikanAnimeLogic
 import com.example.dm_proyecto2_pedidosonline.Logic.lists.listItems
+import com.example.dm_proyecto2_pedidosonline.Logic.marvelLogic.MarvelLogic
 import com.example.dm_proyecto2_pedidosonline.data.entities.marvel.MarvelChars
 import com.example.dm_proyecto2_pedidosonline.ui.activities.DetailsMarvelItem
 import com.example.dm_proyecto2_pedidosonline.ui.adapters.MarvelAdapter
@@ -48,6 +49,7 @@ class FirstFragment : Fragment() {
         )
         binding.spinner.adapter = adapter
         //binding.listView.adapter=adapter
+        chargeDataRV()
 
         binding.rvSwipe.setOnRefreshListener {
             chargeDataRV()
@@ -63,9 +65,8 @@ class FirstFragment : Fragment() {
 
     fun chargeDataRV() {
         lifecycleScope.launch(Dispatchers.IO) {
-            val x = JikanAnimeLogic().getAllAnimes()
             val rvAdapter = MarvelAdapter(
-                x
+                MarvelLogic().getAllCharacters("a" + "",10)
             ) { sendMarvelItems(it) }
 
             withContext(Dispatchers.Main) {
