@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.dm_proyecto2_pedidosonline.R
@@ -33,7 +34,7 @@ class FirstFragment : Fragment() {
 
     private lateinit var lmanager: LinearLayoutManager
 
-    private lateinit var marvelCharacterItems: MutableList<MarvelChars>
+    private var marvelCharacterItems: MutableList<MarvelChars> = mutableListOf<MarvelChars>()
 
     private var rvAdapter: MarvelAdapter = MarvelAdapter { sendMarvelItems(it) }
     override fun onCreateView(
@@ -64,7 +65,7 @@ class FirstFragment : Fragment() {
         binding.spinner.adapter = adapter
 
         binding.rvSwipe.setOnRefreshListener {
-            chargeDataRV("cap")
+            chargeDataRV()
             binding.rvSwipe.isRefreshing = false
         }
         binding.rvMarvelChars.addOnScrollListener(
@@ -99,19 +100,20 @@ class FirstFragment : Fragment() {
         startActivity(i);
     }
 
-    fun chargeDataRV(search: String) {
-        lifecycleScope.launch(Dispatchers.IO) {
-            var marvelCharacterItems=MarvelLogic().getAllCharacters(
-                "Spider",5
-            )
-            rvAdapter.items=JikanAnimeLogic().getAllAnimes()
-            withContext(Dispatchers.Main) {
-                with(binding.rvMarvelChars) {
-                    this.adapter = rvAdapter
-                    this.layoutManager = lmanager
-                }
-            }
+    fun chargeDataRV() {
+
+        lifecycleScope.launch(Dispatchers.Main) {
+            marvelCharacterItems= withContext(Dispatchers.IO){
+                return@withContext (JikanAnimeLogic().getAllAnimes (
+                ))
+            } as MutableList<MarvelChars>
+
+            rvAdapter.items =
+                JikanAnimeLogic().getAllAnimes()
+        binding.rvMarvelChars.apply{
+            this.adapter = rvAdapter
+            this.layoutManager = lmanager
         }
     }
 
-}
+}}
