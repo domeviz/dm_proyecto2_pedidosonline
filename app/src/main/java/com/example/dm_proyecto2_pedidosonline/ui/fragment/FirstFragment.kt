@@ -32,6 +32,9 @@ class FirstFragment : Fragment() {
     private lateinit var binding: FragmentFirstBinding
 
     private lateinit var lmanager: LinearLayoutManager
+
+    private lateinit var marvelCharacterItems: MutableList<MarvelChars>
+
     private var rvAdapter: MarvelAdapter = MarvelAdapter { sendMarvelItems(it) }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -83,14 +86,12 @@ class FirstFragment : Fragment() {
                                 withContext(Dispatchers.Main) {
                                     rvAdapter.updateListItems(newItems)
                                 }
-
                             }
                         }
                     }
-
                 }
             })
-    }
+        }
 
     fun sendMarvelItems(item: MarvelChars) {
         val i = Intent(requireActivity(), DetailsMarvelItem::class.java)
@@ -100,6 +101,9 @@ class FirstFragment : Fragment() {
 
     fun chargeDataRV(search: String) {
         lifecycleScope.launch(Dispatchers.IO) {
+            var marvelCharacterItems=MarvelLogic().getAllCharacters(
+                "Spider",5
+            )
             rvAdapter.items=JikanAnimeLogic().getAllAnimes()
             withContext(Dispatchers.Main) {
                 with(binding.rvMarvelChars) {
