@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.dm_proyecto2_pedidosonline.R
 import com.example.dm_proyecto2_pedidosonline.databinding.FragmentFirstBinding
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.dm_proyecto2_pedidosonline.Logic.jikanLogic.JikanAnimeLogic
 import com.example.dm_proyecto2_pedidosonline.Logic.lists.listItems
 import com.example.dm_proyecto2_pedidosonline.Logic.marvelLogic.MarvelLogic
@@ -30,12 +31,22 @@ class FirstFragment : Fragment() {
 
     private lateinit var binding: FragmentFirstBinding
 
+    private lateinit var lmanager: LinearLayoutManager
+    private var rvAdapter: MarvelAdapter = MarvelAdapter { sendMarvelItems(it) }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentFirstBinding.inflate(layoutInflater, container, false)
-        // Inflate the layout for this fragment
+        binding = FragmentFirstBinding.inflate(
+            layoutInflater,
+            container,
+            false
+        )
+        lmanager = LinearLayoutManager(
+            requireActivity(),
+            LinearLayoutManager.VERTICAL,
+            false
+        )
         return binding.root
     }
 
@@ -48,33 +59,52 @@ class FirstFragment : Fragment() {
             names
         )
         binding.spinner.adapter = adapter
-        //binding.listView.adapter=adapter
-        chargeDataRV()
 
         binding.rvSwipe.setOnRefreshListener {
-            chargeDataRV()
+            chargeDataRV("cap")
             binding.rvSwipe.isRefreshing = false
         }
+        binding.rvMarvelChars.addOnScrollListener(
+            object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+
+                    if (dy > 0) {
+                        val v = lmanager.childCount
+                        val p = lmanager.findFirstVisibleItemPosition()
+                        val t = lmanager.itemCount
+
+                        if ((v + p) >= t) {
+                            lifecycleScope.launch((Dispatchers.IO)) {
+                                val newItems = JikanAnimeLogic().getAllAnimes()
+                                /* val newItems = MarvelLogic().getAllCharacters(
+                                     name="cap" ,
+                                     5)*/
+                                withContext(Dispatchers.Main) {
+                                    rvAdapter.updateListItems(newItems)
+                                }
+
+                            }
+                        }
+                    }
+
+                }
+            })
     }
 
     fun sendMarvelItems(item: MarvelChars) {
         val i = Intent(requireActivity(), DetailsMarvelItem::class.java)
-        i.putExtra("name",item)
+        i.putExtra("name", item)
         startActivity(i);
     }
 
-    fun chargeDataRV() {
+    fun chargeDataRV(search: String) {
         lifecycleScope.launch(Dispatchers.IO) {
-            val rvAdapter = MarvelAdapter(
-                MarvelLogic().getAllCharacters("a" + "",10)
-            ) { sendMarvelItems(it) }
-
+            rvAdapter.items=JikanAnimeLogic().getAllAnimes()
             withContext(Dispatchers.Main) {
                 with(binding.rvMarvelChars) {
                     this.adapter = rvAdapter
-                    this.layoutManager = LinearLayoutManager(
-                        requireActivity(), LinearLayoutManager.VERTICAL, false
-                    )
+                    this.layoutManager = lmanager
                 }
             }
         }

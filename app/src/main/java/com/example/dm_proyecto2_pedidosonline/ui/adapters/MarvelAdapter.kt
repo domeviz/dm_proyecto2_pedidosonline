@@ -14,17 +14,16 @@ import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 
 class MarvelAdapter(
-    private val items: List<MarvelChars>,
     private var fnClick: (MarvelChars) -> Unit
 ) :
     RecyclerView.Adapter<MarvelAdapter.MarvelViewHolder>() {
+    var items:List<MarvelChars> = listOf()
     class MarvelViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding: MarvelCharactersBinding = MarvelCharactersBinding.bind(view)
         fun render(item: MarvelChars, fnClick: (MarvelChars) -> Unit) {
             binding.txtTitulo.text = item.nombre
             binding.txtComic.text = item.comic
             Picasso.get().load(item.imagen).into(binding.imgMarvel)
-            Log.d("PICASSO",item.imagen)
 
             itemView.setOnClickListener {
                 fnClick(item)
@@ -44,8 +43,12 @@ class MarvelAdapter(
         return MarvelViewHolder(inflater.inflate(R.layout.marvel_characters, parent, false))
     }
 
-    override fun getItemCount(): Int {
-        return items.size
+    override fun getItemCount(): Int =items.size
+
+    fun updateListItems(newItems: List<MarvelChars>){
+        this.items =this.items.plus(newItems)
+        notifyDataSetChanged()
+
     }
 
     override fun onBindViewHolder(holder: MarvelAdapter.MarvelViewHolder, position: Int) {

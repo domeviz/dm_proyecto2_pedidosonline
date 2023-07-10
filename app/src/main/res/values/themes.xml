@@ -25,7 +25,7 @@
         <item name="android:textColor">@color/black</item>
     </style>
     <style name="ActiveIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
-        <item name="android:color">#D08DDB</item>
+        <item name="android:color">@color/morado2</item>
     </style>
     <style name="button" >
         <item name="android:textColor">@color/white</item>
