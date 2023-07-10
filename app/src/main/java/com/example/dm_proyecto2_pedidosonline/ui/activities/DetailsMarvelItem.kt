@@ -23,7 +23,7 @@ class DetailsMarvelItem : AppCompatActivity() {
         if (item != null) {
             binding.textoCentrado.text = item.nombre
             binding.txtComic.text = item.comic
-            binding.txtDescripcion.text=item.descripcion
+//            binding.txtDescripcion.text=item.descripcion
             Picasso.get().load(item.imagen).into(binding.imgPersonaje)
         }
     }

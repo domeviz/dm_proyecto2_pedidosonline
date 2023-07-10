@@ -22,7 +22,7 @@ class JikanAnimeLogic {
                     it.title,
 //                    it.titles[0].title,
                     it.duration,
-                    it.synopsis,
+//                    it.synopsis,
                     it.images.jpg.image_url,
 //                    it.rating
                 )

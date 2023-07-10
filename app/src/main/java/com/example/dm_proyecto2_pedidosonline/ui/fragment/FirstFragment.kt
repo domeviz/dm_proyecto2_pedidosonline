@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter
 import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.dm_proyecto2_pedidosonline.R
 import com.example.dm_proyecto2_pedidosonline.databinding.FragmentFirstBinding
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -34,6 +35,8 @@ class FirstFragment : Fragment() {
 
     private lateinit var lmanager: LinearLayoutManager
 
+    private lateinit var gmanager: GridLayoutManager
+
     private var marvelCharacterItems: MutableList<MarvelChars> = mutableListOf<MarvelChars>()
 
     private var rvAdapter: MarvelAdapter = MarvelAdapter { sendMarvelItems(it) }
@@ -50,6 +53,9 @@ class FirstFragment : Fragment() {
             requireActivity(),
             LinearLayoutManager.VERTICAL,
             false
+        )
+        gmanager= GridLayoutManager(
+            requireActivity(),2
         )
         return binding.root
     }
@@ -80,7 +86,8 @@ class FirstFragment : Fragment() {
 
                         if ((v + p) >= t) {
                             lifecycleScope.launch((Dispatchers.IO)) {
-                                val newItems = JikanAnimeLogic().getAllAnimes()
+                                val newItems = MarvelLogic().getAllMarvelChars(0,99)
+//                                    JikanAnimeLogic().getAllAnimes()
                                 /* val newItems = MarvelLogic().getAllCharacters(
                                      name="cap" ,
                                      5)*/
@@ -104,12 +111,14 @@ class FirstFragment : Fragment() {
 
         lifecycleScope.launch(Dispatchers.Main) {
             marvelCharacterItems= withContext(Dispatchers.IO){
-                return@withContext (JikanAnimeLogic().getAllAnimes (
-                ))
+                return@withContext (
+                        MarvelLogic().getAllMarvelChars(0,99))
+//                        JikanAnimeLogic().getAllAnimes ())
             } as MutableList<MarvelChars>
 
             rvAdapter.items =
-                JikanAnimeLogic().getAllAnimes()
+                MarvelLogic().getAllMarvelChars(0,99)
+//                JikanAnimeLogic().getAllAnimes()
         binding.rvMarvelChars.apply{
             this.adapter = rvAdapter
             this.layoutManager = lmanager

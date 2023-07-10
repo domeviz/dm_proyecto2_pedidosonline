@@ -4,6 +4,7 @@ import android.util.Log
 import com.example.dm_proyecto2_pedidosonline.data.connections.ApiConnection
 import com.example.dm_proyecto2_pedidosonline.data.endpoints.MarvelEndpoint
 import com.example.dm_proyecto2_pedidosonline.data.entities.marvel.MarvelChars
+import com.example.dm_proyecto2_pedidosonline.data.entities.marvel.data.getMarvelChars
 
 class MarvelLogic {
     suspend fun getAllCharacters(name:String,limit:Int):List<MarvelChars>{
@@ -25,7 +26,7 @@ class MarvelLogic {
                         it.id,
                         it.name,
                         comic,
-                        it.description,
+//                        it.description,
                         it.thumbnail.path+"."+it.thumbnail.extension
                     )
                     itemList.add(m)
@@ -36,6 +37,33 @@ class MarvelLogic {
             }
         }
         //Compruebo si la respuesta se ejecuto
+        return itemList
+    }
+    suspend fun getAllMarvelChars(offset:Int,limit:Int):List<MarvelChars>{
+
+        var itemList= arrayListOf<MarvelChars>()
+
+        var call=
+            ApiConnection.getService(ApiConnection.TypeApi.Marvel, MarvelEndpoint::class.java)
+        if (call!=null){
+            var response=call.getAllMarvelChars(offset,limit)
+
+            offset.toString()
+
+            if (response.isSuccessful){
+                response.body()!!.data.results.forEach{
+                    val m= it.getMarvelChars()
+                    itemList.add(m)
+                }
+            }
+            else{
+                Log.d("UCE",response.toString())
+            }
+        }
+
+
+        //Compruebo si la respuesta se ejecuto
+
         return itemList
     }
 }
