@@ -39,13 +39,12 @@ class SegundaActivity : AppCompatActivity() {
     }
 
     private fun initClass() {
-        binding.back.setOnClickListener {
-            var intent = Intent(
-                this,
-                MainActivity::class.java
-            )
-
-        }
+//        binding.back.setOnClickListener {
+//            var intent = Intent(
+//                this,
+//                MainActivity::class.java
+//            )
+//        }
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.inicio -> {

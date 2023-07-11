@@ -121,7 +121,7 @@ class FirstFragment : Fragment() {
 //                JikanAnimeLogic().getAllAnimes()
         binding.rvMarvelChars.apply{
             this.adapter = rvAdapter
-            this.layoutManager = lmanager
+            this.layoutManager = gmanager
         }
     }
 
