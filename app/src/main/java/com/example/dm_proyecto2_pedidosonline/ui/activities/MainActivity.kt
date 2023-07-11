@@ -9,6 +9,7 @@ import com.example.dm_proyecto2_pedidosonline.R
 import com.example.dm_proyecto2_pedidosonline.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar
 import android.util.Log
+import com.example.dm_proyecto2_pedidosonline.ui.utilities.DM_Proyecto2_PedidosOnline
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,6 +24,11 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         initClass()
+        //Singleton
+        //Una sola instancia
+//        Aqui accede directamente a la BD
+        val db=DM_Proyecto2_PedidosOnline.getDbInstance()
+        db.marvelDao()
     }
 
     override fun onDestroy() {

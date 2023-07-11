@@ -3,6 +3,7 @@ package com.example.dm_proyecto2_pedidosonline.data.entities.marvel.data.databas
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.example.dm_proyecto2_pedidosonline.data.entities.marvel.MarvelChars
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -14,3 +15,13 @@ data class MarvelCharsDB(@PrimaryKey(autoGenerate = true)
                          val image:String,
                          val desc:String
                          ):Parcelable
+
+//MarvelCharsDB se va a convertir en MarvelChars
+fun MarvelCharsDB.getMarvelCharsDB():MarvelChars{
+    return MarvelChars(
+        id,
+        name,
+        comic,
+        image
+    )
+}

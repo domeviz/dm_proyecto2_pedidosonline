@@ -20,6 +20,7 @@ import com.example.dm_proyecto2_pedidosonline.Logic.marvelLogic.MarvelLogic
 import com.example.dm_proyecto2_pedidosonline.data.entities.marvel.MarvelChars
 import com.example.dm_proyecto2_pedidosonline.ui.activities.DetailsMarvelItem
 import com.example.dm_proyecto2_pedidosonline.ui.adapters.MarvelAdapter
+import com.example.dm_proyecto2_pedidosonline.ui.utilities.DM_Proyecto2_PedidosOnline
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -125,4 +126,26 @@ class FirstFragment : Fragment() {
         }
     }
 
-}}
+}
+    fun chargeDataRVDB() {
+
+        lifecycleScope.launch(Dispatchers.Main) {
+            marvelCharacterItems= withContext(Dispatchers.IO){
+                return@withContext (MarvelLogic
+            // Para que el UI acceda a la Base de Datos debe pasar por la Lógica
+            //En este caso el UI está accediendo directamente a la BD asi que esta mal
+            // DM_Proyecto2_PedidosOnline.getDbInstance().marvelDao().getAllCharacters().toMutableList()
+//                        JikanAnimeLogic().getAllAnimes ())
+            } as MutableList<MarvelChars>
+
+            rvAdapter.items =
+                MarvelLogic().getAllMarvelChars(0,99)
+//                JikanAnimeLogic().getAllAnimes()
+            binding.rvMarvelChars.apply{
+                this.adapter = rvAdapter
+                this.layoutManager = lmanager
+            }
+        }
+
+    }
+}
