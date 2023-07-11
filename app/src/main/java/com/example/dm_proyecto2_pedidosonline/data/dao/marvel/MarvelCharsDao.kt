@@ -8,11 +8,11 @@ import com.example.dm_proyecto2_pedidosonline.data.entities.marvel.data.database
 @Dao
 interface MarvelCharsDao {
     @Query("select * from MarvelCharsDB")
-    fun getAllCharacters() : List<MarvelCharsDao>
+    fun getAllCharacters() : List<MarvelCharsDB>
 
-    @Query("select * from MarvelCharsDB where id=:idd")
-    fun getOneCharacters(idd: Int) : List<MarvelCharsDB>
+    @Query("select * from MarvelCharsDB where id=:id")
+    fun getOneCharacters(id: Int) : MarvelCharsDB
 
     @Insert
-    fun insertMarvelChar(ch : List<MarvelCharsDao>)
+    fun insertMarvelChar(ch : List<MarvelCharsDB>)
 }

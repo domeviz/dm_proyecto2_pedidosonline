@@ -54,8 +54,8 @@ class FirstFragment : Fragment() {
             LinearLayoutManager.VERTICAL,
             false
         )
-        gmanager= GridLayoutManager(
-            requireActivity(),2
+        gmanager = GridLayoutManager(
+            requireActivity(), 2
         )
         return binding.root
     }
@@ -71,7 +71,7 @@ class FirstFragment : Fragment() {
         binding.spinner.adapter = adapter
 
         binding.rvSwipe.setOnRefreshListener {
-            chargeDataRV()
+            chargeDataRVDB()
             binding.rvSwipe.isRefreshing = false
         }
         binding.rvMarvelChars.addOnScrollListener(
@@ -86,7 +86,7 @@ class FirstFragment : Fragment() {
 
                         if ((v + p) >= t) {
                             lifecycleScope.launch((Dispatchers.IO)) {
-                                val newItems = MarvelLogic().getAllMarvelChars(0,99)
+                                val newItems = MarvelLogic().getAllMarvelChars(0, 99)
 //                                    JikanAnimeLogic().getAllAnimes()
                                 /* val newItems = MarvelLogic().getAllCharacters(
                                      name="cap" ,
@@ -99,7 +99,7 @@ class FirstFragment : Fragment() {
                     }
                 }
             })
-        }
+    }
 
     fun sendMarvelItems(item: MarvelChars) {
         val i = Intent(requireActivity(), DetailsMarvelItem::class.java)
@@ -110,19 +110,48 @@ class FirstFragment : Fragment() {
     fun chargeDataRV() {
 
         lifecycleScope.launch(Dispatchers.Main) {
-            marvelCharacterItems= withContext(Dispatchers.IO){
+            marvelCharacterItems = withContext(Dispatchers.IO) {
                 return@withContext (
-                        MarvelLogic().getAllMarvelChars(0,99))
+                        MarvelLogic().getAllMarvelChars(0, 99))
 //                        JikanAnimeLogic().getAllAnimes ())
             } as MutableList<MarvelChars>
 
             rvAdapter.items =
-                MarvelLogic().getAllMarvelChars(0,99)
+                MarvelLogic().getAllMarvelChars(0, 99)
 //                JikanAnimeLogic().getAllAnimes()
-        binding.rvMarvelChars.apply{
-            this.adapter = rvAdapter
-            this.layoutManager = gmanager
+            binding.rvMarvelChars.apply {
+                this.adapter = rvAdapter
+                this.layoutManager = gmanager
+            }
+        }
+    }
+        private fun chargeDataRVDB() {
+            lifecycleScope.launch(Dispatchers.Main) {
+                marvelCharacterItems = withContext(Dispatchers.IO) {
+                    var marvelCharsItems =
+                        MarvelLogic().getAllCharactersDB().toMutableList()
+                    if (marvelCharsItems.isEmpty()) {
+                        marvelCharacterItems = (MarvelLogic().getAllCharacters(
+                            name = "spider",
+                            10
+                        ).toMutableList())
+                        MarvelLogic().insertMarvelCharstoDB(marvelCharacterItems)
+                    }
+                    return@withContext marvelCharsItems
+                }
+                rvAdapter.items = marvelCharacterItems
+                //JikanAnimeLogic().getAllAnimes()
+                // MarvelLogic().getAllCharactersDB()
+                //ListItems().returnMarvelChar()
+                /*   JikanAnimeLogic().getAllAnimes()
+       ) { sendMarvelItems(it) }
+    */           binding.rvMarvelChars.apply {
+                this.adapter = rvAdapter
+                //  this.layoutManager = lmanager
+                this.layoutManager = lmanager
+            }
+            }
         }
     }
 
-}}
+
