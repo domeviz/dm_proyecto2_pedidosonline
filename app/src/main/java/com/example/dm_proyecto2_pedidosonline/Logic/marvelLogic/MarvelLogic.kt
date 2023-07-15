@@ -75,4 +75,43 @@ class MarvelLogic {
         }
         DM_Proyecto2_PedidosOnline.getDbInstance().marvelDao().insertMarvelChar(itemsDB)
     }
+    suspend fun getInitChars(page:Int):MutableList<MarvelChars>{
+        var items= mutableListOf<MarvelChars>()
+        try{
+            items=MarvelLogic().getAllCharactersDB().toMutableList()
+
+            if (items.isEmpty()){
+//                items=(MarvelLogic().getAllMarvelChars(0,page*3))
+//                items=(MarvelLogic().getAllMarvelChars(0,page*3).toMutableList())
+                items=(MarvelLogic().getAllMarvelChars(0,page*3) as MutableList<MarvelChars>)
+                MarvelLogic(). insertMarvelCharstoDB(items)
+            }
+        }catch(ex:Exception){
+            throw RuntimeException(ex.message)
+        }
+        return items
+    }
+    suspend fun getAllCharsDB(offset:Int,limit: Int):MutableList<MarvelChars>{
+        var marvelCharsItems= mutableListOf<MarvelChars>()
+        try {
+            marvelCharsItems=
+                getAllCharactersDB().toMutableList()
+
+            if (marvelCharsItems.isEmpty()) {
+                marvelCharsItems = (MarvelLogic().getAllMarvelChars(
+                    offset,
+                    limit
+                ).toMutableList())
+                Log.d("Prueba",marvelCharsItems.size.toString())
+                insertMarvelCharstoDB(marvelCharsItems)
+
+            }
+            return marvelCharsItems
+        }catch (ex:Exception){
+            throw RuntimeException(ex.message)
+        }
+
+        Log.d("MC",marvelCharsItems.size.toString())
+
+    }
 }
