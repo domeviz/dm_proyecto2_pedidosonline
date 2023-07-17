@@ -2,11 +2,14 @@ package com.example.dm_proyecto2_pedidosonline.ui.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.core.content.ContextCompat.startActivity
+import androidx.datastore.dataStore
+import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
@@ -19,8 +22,13 @@ import com.example.dm_proyecto2_pedidosonline.Logic.lists.listItems
 import com.example.dm_proyecto2_pedidosonline.Logic.marvelLogic.MarvelLogic
 import com.example.dm_proyecto2_pedidosonline.data.entities.marvel.MarvelChars
 import com.example.dm_proyecto2_pedidosonline.ui.activities.DetailsMarvelItem
+import com.example.dm_proyecto2_pedidosonline.ui.activities.dataStore
 import com.example.dm_proyecto2_pedidosonline.ui.adapters.MarvelAdapter
+import com.example.dm_proyecto2_pedidosonline.ui.data.UserDataStore
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -62,6 +70,14 @@ class FirstFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+
+        lifecycleScope.launch(Dispatchers.Main) {
+            getDataStore().collect {user->
+                Log.d("UCE", user.email)
+                Log.d("UCE", user.name)
+                Log.d("UCE", user.session)
+            }
+        }
         val names = arrayListOf<String>("Spiderman", "Invisible Woman", "Eternity", "Black Widow")
         val adapter = ArrayAdapter<String>(
             requireActivity(),
@@ -152,6 +168,14 @@ class FirstFragment : Fragment() {
             }
             }
         }
+    private fun getDataStore()= requireActivity().dataStore.data.map {
+            prefs->
+        UserDataStore(
+            name=prefs[stringPreferencesKey("usuario")].orEmpty(),
+            email=prefs[stringPreferencesKey("email")].orEmpty(),
+            session=prefs[stringPreferencesKey("session")].orEmpty()
+        )
+    }
     }
 
 
