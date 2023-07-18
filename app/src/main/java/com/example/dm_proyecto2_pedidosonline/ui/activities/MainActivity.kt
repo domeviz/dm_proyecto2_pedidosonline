@@ -1,8 +1,10 @@
 package com.example.dm_proyecto2_pedidosonline.ui.activities
 
 import android.annotation.SuppressLint
+import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.dm_proyecto1_foodapp.Logic.validator.LoginValidator
@@ -10,6 +12,8 @@ import com.example.dm_proyecto2_pedidosonline.R
 import com.example.dm_proyecto2_pedidosonline.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar
 import android.util.Log
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult.*
 import androidx.datastore.core.DataStore
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.Dispatchers
@@ -61,6 +65,62 @@ class MainActivity : AppCompatActivity() {
                     Snackbar.LENGTH_LONG
                 ).show()
             }
+            }
+        binding.btnSearchGoogle.setOnClickListener{
+//            val intent=Intent(
+//                Intent.ACTION_VIEW,
+////                    Uri.parse("http://google.com.ec"))
+////                    Uri.parse("http://twitter.com")
+//                //Reconoce que es una coordenada y va a google maps
+////                    Uri.parse("geo:-0.1953661,-78.4999071")
+                    //Llamar
+//                Uri.parse("tel:0980427577")
+//            )
+            val intent=Intent(
+                Intent.ACTION_WEB_SEARCH
+            )
+            intent.setClassName(
+                "com.google.android.googlequicksearchbox",
+                "com.google.android.googlequicksearchbox.SearchActivity"
+            )
+            intent.putExtra(SearchManager.QUERY,binding.correoEjemplo.text)
+            startActivity(intent)
+        }
+        val appResultLocal=registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+            resultActivity->
+            //Logica de lo que va a pasar y los posibles resultados
+            when(resultActivity.resultCode){
+                RESULT_OK->{
+                    Log.d("UCE","Resultado Exitoso")
+                    Snackbar.make(
+                        binding.titulo,"Resultado Exitoso",Snackbar.LENGTH_LONG
+                    ).show()
+                }
+                RESULT_CANCELED->{
+                    Log.d("UCE","Resultado Fallido")
+                    Snackbar.make(
+                        binding.titulo,"Resultado Fallido",Snackbar.LENGTH_LONG
+                    ).show()
+                }
+                else->{
+                    Log.d("UCE","Resultado Dudoso")
+                }
+            }
+            //Mejor se hace con when
+//            if(resultActivity.resultCode== RESULT_OK){
+//
+//            } else{
+//                if(resultActivity.resultCode== RESULT_CANCELED){
+//
+//                }else{
+//
+//                }
+//            }
+        }
+        //Las 2 activitys se van a comunicar y en base a eso se determina el appResultLocal
+        binding.btnResult.setOnClickListener{
+            val resIntent=Intent(this,ResultActivity::class.java)
+            appResultLocal.launch(resIntent)
         }
     }
 

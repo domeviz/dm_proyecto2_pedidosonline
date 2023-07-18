@@ -129,7 +129,7 @@
         android:layout_marginTop="25dp"
         android:text="@string/olvidoPassword"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton6" />
+        app:layout_constraintTop_toBottomOf="@+id/btnSearchGoogle" />
 
     <TextView
         android:id="@+id/password"
@@ -145,7 +145,7 @@
         app:layout_constraintTop_toBottomOf="@+id/correoEjemplo" />
 
     <ImageButton
-        android:id="@+id/imageButton5"
+        android:id="@+id/btnResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -153,12 +153,12 @@
         android:layout_marginEnd="71dp"
         android:backgroundTint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageButton6"
+        app:layout_constraintStart_toEndOf="@+id/btnSearchGoogle"
         app:layout_constraintTop_toBottomOf="@+id/conectese"
         app:srcCompat="@drawable/fblogin" />
 
     <ImageButton
-        android:id="@+id/imageButton6"
+        android:id="@+id/btnSearchGoogle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -181,5 +181,5 @@
         android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/olvidoPassword"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton5" />
+        app:layout_constraintTop_toBottomOf="@+id/btnResult" />
 </androidx.constraintlayout.widget.ConstraintLayout>
