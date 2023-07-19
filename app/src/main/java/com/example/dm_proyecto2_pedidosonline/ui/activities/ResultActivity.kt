@@ -1,5 +1,6 @@
 package com.example.dm_proyecto2_pedidosonline.ui.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.dm_proyecto2_pedidosonline.R
@@ -18,12 +19,16 @@ class ResultActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         binding.resultOK.setOnClickListener{
-            setResult(RESULT_OK)
+            val i= Intent()
+            i.putExtra("result","Resultado exitoso")
+            setResult(RESULT_OK,i)
             //Se cierra la activity y se ejecuta el onDestroy
             finish()
         }
         binding.resultFalse.setOnClickListener{
-            setResult(RESULT_CANCELED)
+            val i= Intent()
+            i.putExtra("result","Resultado fallido")
+            setResult(RESULT_CANCELED,i)
             finish()
         }
     }

@@ -7,6 +7,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.speech.RecognizerIntent
 import com.example.dm_proyecto1_foodapp.Logic.validator.LoginValidator
 import com.example.dm_proyecto2_pedidosonline.R
 import com.example.dm_proyecto2_pedidosonline.databinding.ActivityMainBinding
@@ -22,6 +23,8 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import java.util.Locale
+import java.util.UUID
 
 // At the top level of your kotlin file:
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
@@ -89,44 +92,90 @@ class MainActivity : AppCompatActivity() {
         val appResultLocal=registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
             resultActivity->
             //Logica de lo que va a pasar y los posibles resultados
-            when(resultActivity.resultCode){
+            var message = when(resultActivity.resultCode){
                 RESULT_OK->{
-                    Log.d("UCE","Resultado Exitoso")
-                    Snackbar.make(
-                        binding.titulo,"Resultado Exitoso",Snackbar.LENGTH_LONG
-                    ).show()
+                    resultActivity.data?.getStringExtra("result").orEmpty()
                 }
                 RESULT_CANCELED->{
-                    Log.d("UCE","Resultado Fallido")
-                    Snackbar.make(
-                        binding.titulo,"Resultado Fallido",Snackbar.LENGTH_LONG
-                    ).show()
+                    resultActivity.data?.getStringExtra("result").orEmpty()
                 }
                 else->{
-                    Log.d("UCE","Resultado Dudoso")
+                    "Resultado Dudoso"
                 }
             }
-            //Mejor se hace con when
-//            if(resultActivity.resultCode== RESULT_OK){
-//
-//            } else{
-//                if(resultActivity.resultCode== RESULT_CANCELED){
-//
-//                }else{
-//
-//                }
-//            }
+            val sn=Snackbar.make(
+                binding.titulo,message,Snackbar.LENGTH_LONG
+            )
+            sn.setBackgroundTint(resources.getColor(R.color.rosa))
+            sn.setText(message)
+            sn.show()
+
         }
+        val speechToText = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+                activityResult ->
+            val sn =Snackbar.make(binding.titulo,"",Snackbar.LENGTH_LONG)
+            var message=""
+            when(activityResult.resultCode){
+                RESULT_OK->{
+                    val msg=activityResult?.data?.getStringArrayExtra(RecognizerIntent.EXTRA_RESULTS)
+                        .toString()
+                    if(msg.isNotEmpty()){
+                        val intent =Intent(
+                            Intent.ACTION_WEB_SEARCH
+                        )
+                        intent.setClassName(
+                            "com.google.android.googlequicksearchbox",
+                            "com.google.android.googlequicksearchbox.SearchActivity"
+                        )
+                        intent.putExtra(
+                            SearchManager.QUERY,msg.toString())
+                        startActivity(intent)
+                    }
+
+                }
+                RESULT_CANCELED->{
+                    message="Proceso Cancelado"
+                    sn.setBackgroundTint(resources.getColor(
+                        R.color.rosa
+                    ))
+                }
+                else ->{
+                    message="Proceso Dudoso"
+                    sn.setBackgroundTint(resources.getColor(
+                        R.color.rosa
+                    ))
+                }
+            }
+            sn.setText(message)
+            sn.show()
+
+        }
+
+
         //Las 2 activitys se van a comunicar y en base a eso se determina el appResultLocal
         binding.btnResult.setOnClickListener{
-            val resIntent=Intent(this,ResultActivity::class.java)
-            appResultLocal.launch(resIntent)
+            val intentSpeech=Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
+            intentSpeech.putExtra(
+                RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
+            )
+            intentSpeech.putExtra(
+                RecognizerIntent.EXTRA_LANGUAGE,
+                Locale.getDefault()
+            )
+            intentSpeech.putExtra(
+                RecognizerIntent.EXTRA_PROMPT,
+                "Di algo"
+            )
+            speechToText.launch(intentSpeech)
         }
     }
 
     private suspend fun saveDataStore(stringData:String){
         dataStore.edit{prefs->
             prefs[stringPreferencesKey("usuario")]=stringData
+            prefs[stringPreferencesKey("session")] =UUID.randomUUID().toString()
+            prefs[stringPreferencesKey("email")] ="Dome"
         }
     }
 }
