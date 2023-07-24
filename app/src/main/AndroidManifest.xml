@@ -2,7 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.INTERNET" />
+<!--    Permiso sin ubicacion-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+<!--    Permiso con locacion-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <application
         android:name=".ui.utilities.DM_Proyecto2_PedidosOnline"

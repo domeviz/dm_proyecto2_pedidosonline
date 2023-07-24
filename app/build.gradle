@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.dm_proyecto2_pedidosonline"
-        minSdk 21
+        minSdk 30
         targetSdk 33
         versionCode 1
         versionName "1.0"
@@ -66,5 +66,9 @@ dependencies {
     // To use Kotlin annotation processing tool (kapt)
     kapt("androidx.room:room-compiler:2.5.2")
 
+    //DataStore
     implementation "androidx.datastore:datastore-preferences:1.0.0"
+
+    //Ubicacion
+    implementation("com.google.android.gms:play-services-location:21.0.1")
 }
