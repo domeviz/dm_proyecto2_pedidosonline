@@ -1,18 +1,24 @@
 package com.example.dm_proyecto2_pedidosonline.ui.activities
 
 import android.annotation.SuppressLint
+import android.app.AlarmManager
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.example.dm_proyecto2_pedidosonline.R
 import com.example.dm_proyecto2_pedidosonline.databinding.ActivityNotificationBinding
+import com.example.dm_proyecto2_pedidosonline.ui.utilities.BroadcasterNotifications
+import java.util.Calendar
 
 class NotificationActivity : AppCompatActivity() {
     private lateinit var binding: ActivityNotificationBinding
@@ -29,6 +35,36 @@ class NotificationActivity : AppCompatActivity() {
             //Cuando este creado se envia la notificacion
             sendNotification()
         }
+        binding.btnNotificationProgramada.setOnClickListener{
+            val calendar=Calendar.getInstance()
+            val hora=binding.timePicker.hour
+            val minutes=binding.timePicker.minute
+            Toast.makeText(
+                this,
+                "La notificacion se activara a las: $hora:$minutes",
+                Toast.LENGTH_SHORT
+            ).show()
+            calendar.set(Calendar.HOUR,hora)
+            calendar.set(Calendar.MINUTE,minutes)
+            calendar.set(Calendar.SECOND,0)
+            sendNotificationTimePicker(calendar.timeInMillis)
+        }
+    }
+
+    //Nota: Las fechas siempre se convierten en numeros tipo Long
+    private fun sendNotificationTimePicker(time:Long) {
+        //Desde cualquier parte de la aplicacion hacia el broadcast
+        val myIntent= Intent(applicationContext,BroadcasterNotifications::class.java)
+        val myPendingIntent=PendingIntent.getBroadcast(
+            applicationContext,
+            0,
+            myIntent,
+            //Estas banderas van a decir que va a pasar cuando se abra el intent
+            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+        )
+        //Alarm Manager nos va a ayudar a que el sistema se levante
+        val alarmManager=getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP,time,myPendingIntent)
     }
 
     val CHANNEL: String ="Notificaciones"
