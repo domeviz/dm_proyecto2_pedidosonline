@@ -71,4 +71,18 @@ dependencies {
 
     //Ubicacion
     implementation("com.google.android.gms:play-services-location:21.0.1")
+
+    // Fragment -
+    implementation "androidx.fragment:fragment-ktx:1.6.1"
+    // Activity
+    implementation "androidx.activity:activity-ktx:1.7.2"
+    // ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1"
+    // LiveData - datos que se van a asociar alviewmodel para poder usarlos
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.6.1"
+
+    //Corrutinas para View Model
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.1")
 }
