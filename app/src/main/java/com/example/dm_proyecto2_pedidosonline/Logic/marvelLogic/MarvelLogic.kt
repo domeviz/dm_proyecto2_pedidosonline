@@ -42,7 +42,7 @@ class MarvelLogic {
         if (call!=null){
             var response=call.getAllMarvelChars(offset,limit)
 
-            offset.toString()
+//            offset.toString()
 
             if (response.isSuccessful){
                 response.body()!!.data.results.forEach{
@@ -54,6 +54,7 @@ class MarvelLogic {
                 Log.d("UCE",response.toString())
             }
         }
+        //Comprobar si la respuesta se ejecuto
         return itemList
     }
     suspend fun getAllCharactersDB():List<MarvelChars>{
@@ -68,6 +69,31 @@ class MarvelLogic {
         }
         return itemList
     }
+
+    suspend fun getAllCharsDB(offset:Int,limit: Int):MutableList<MarvelChars>{
+        var marvelCharsItems= mutableListOf<MarvelChars>()
+        try {
+            marvelCharsItems=
+                getAllCharactersDB().toMutableList()
+
+            if (marvelCharsItems.isEmpty()) {
+                marvelCharsItems = (MarvelLogic().getAllMarvelChars(
+                    offset,
+                    limit
+                ).toMutableList())
+                Log.d("UCE PRUEBA",marvelCharsItems.size.toString())
+                insertMarvelCharstoDB(marvelCharsItems)
+
+            }
+            return marvelCharsItems
+        }catch (ex:Exception){
+            throw RuntimeException(ex.message)
+        }
+
+        Log.d("UCE OFFSET",marvelCharsItems.size.toString())
+
+    }
+
     suspend fun insertMarvelCharstoDB(items:List<MarvelChars>){
         var itemsDB = arrayListOf<MarvelCharsDB>()
         items.forEach {
