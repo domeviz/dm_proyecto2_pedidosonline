@@ -39,7 +39,7 @@ class ThirdFragment : Fragment() {
     private lateinit var lmanager: LinearLayoutManager
     private var marvelCharacterItems: MutableList<MarvelChars> = mutableListOf<MarvelChars>()
     private lateinit var progressBar: ProgressBar
-    private  var rvAdapter: MarvelAdapter = MarvelAdapter { sendMarvelItems(it) }
+    private lateinit var rvAdapter: MarvelAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

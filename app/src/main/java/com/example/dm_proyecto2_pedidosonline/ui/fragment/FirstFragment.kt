@@ -53,7 +53,7 @@ class FirstFragment : Fragment() {
 
     private var marvelCharacterItems: MutableList<MarvelChars> = mutableListOf()
 
-    private var rvAdapter: MarvelAdapter = MarvelAdapter { sendMarvelItems(it) }
+    private lateinit var rvAdapter: MarvelAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

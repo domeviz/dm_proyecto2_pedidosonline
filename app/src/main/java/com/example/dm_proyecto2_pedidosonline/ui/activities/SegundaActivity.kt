@@ -38,6 +38,9 @@ class SegundaActivity : AppCompatActivity() {
         initClass()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+    }
     private fun initClass() {
 //        binding.back.setOnClickListener {
 //            var intent = Intent(
@@ -77,6 +80,6 @@ class SegundaActivity : AppCompatActivity() {
                 else -> false
             }
         }
-        startActivity(intent)
+//        startActivity(intent)
     }
 }
