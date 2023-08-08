@@ -6,24 +6,86 @@
     android:layout_height="match_parent"
     tools:context=".ui.activities.BiometricActivity">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/lytMain"
+        android:visibility="visible"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="151dp"
-        android:gravity="center"
-        android:text="Autenticación Biométrica"
-        android:textSize="42sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center_horizontal">
 
-    <ImageView
-        android:id="@+id/btnAutentication"
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Autenticación Biométrica"
+            android:textSize="42sp" />
+
+        <ImageView
+            android:id="@+id/btnAutentication"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/baseline_fingerprint_24" />
+    </LinearLayout>
+
+<!--    Forma 1-->
+<!--    <com.facebook.shimmer.ShimmerFrameLayout-->
+<!--        android:id="@+id/shimmerFrameLayout"-->
+<!--        app:auto_start="true"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent">-->
+
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:gravity="center"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            android:text="Holi"-->
+<!--            android:textSize="25dp"-->
+<!--            android:textColor="@color/morado3"-->
+<!--            />-->
+<!--        <LinearLayout-->
+<!--            android:id="@+id/lytMainCopia"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_marginTop="250dp"-->
+<!--            android:layout_marginBottom="300dp"-->
+<!--            android:gravity="center_horizontal"-->
+<!--            android:orientation="vertical">-->
+
+<!--            <View-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="100dp"-->
+<!--                android:background="@color/rosa3"-->
+<!--                android:gravity="center"></View>-->
+
+<!--            <View-->
+<!--                android:layout_width="48dp"-->
+<!--                android:layout_height="48dp"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:background="@color/rosa3"></View>-->
+<!--        </LinearLayout>-->
+<!--    </com.facebook.shimmer.ShimmerFrameLayout>-->
+
+    <LinearLayout
+        android:id="@+id/lytMainCopia"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="181dp"
-        android:layout_marginTop="85dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:srcCompat="@drawable/baseline_fingerprint_24" />
+        app:layout_constraintTop_toTopOf="parent">
+        <include layout="@layout/shimmer_layout_biometric"></include>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
