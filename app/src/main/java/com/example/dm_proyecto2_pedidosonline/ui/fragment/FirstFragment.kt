@@ -96,7 +96,7 @@ class FirstFragment : Fragment() {
         chargeDataRV(limit,offset)
 
         binding.rvSwipe.setOnRefreshListener {
-//            chargeDataRV(limit,offset)
+            chargeDataRV(limit,offset)
             //chargeDataRVDB(offset,limit)
             binding.rvSwipe.isRefreshing = false
         }

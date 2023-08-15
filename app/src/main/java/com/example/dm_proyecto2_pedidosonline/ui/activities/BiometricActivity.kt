@@ -65,7 +65,7 @@ class BiometricActivity : AppCompatActivity() {
 
                     override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
                         super.onAuthenticationSucceeded(result)
-                        startActivity(Intent(this@BiometricActivity, CameraActivity::class.java))
+                        startActivity(Intent(this@BiometricActivity, SegundaActivity::class.java))
                     }
 
                     override fun onAuthenticationFailed() {

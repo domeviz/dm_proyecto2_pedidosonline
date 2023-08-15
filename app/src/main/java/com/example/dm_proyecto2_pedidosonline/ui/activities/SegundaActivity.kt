@@ -24,27 +24,10 @@ class SegundaActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        var name: String = " "
-//        intent.extras.let{
-//            name=it?.getString("var1")!!
-//        }
-//        Log.d("UCE", "Hola ${name}")
-//        binding.textView.text = "Bienvenida " + name.toString()
-//        Log.d("UCE", "Entrando a Start")
-//        binding.back.setOnClickListener {
-//            var intent = Intent(this, MainActivity::class.java)
-//            startActivity(intent)
-//        }
         initClass()
     }
 
     private fun initClass() {
-//        binding.back.setOnClickListener {
-//            var intent = Intent(
-//                this,
-//                MainActivity::class.java
-//            )
-//        }
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.inicio -> {
@@ -77,6 +60,7 @@ class SegundaActivity : AppCompatActivity() {
                 else -> false
             }
         }
-        startActivity(intent)
+        //No funcionaba porque empezaba la activity otra vez
+//        startActivity(intent)
     }
 }
