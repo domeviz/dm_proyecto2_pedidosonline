@@ -45,10 +45,10 @@
             android:name=".ui.activities.DetailsMarvelItem"
             android:exported="false" />
         <activity
-            android:name=".ui.activities.SegundaActivity"
+            android:name=".ui.activities.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activities.MainActivity"
+            android:name=".ui.activities.SegundaActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
