@@ -28,31 +28,41 @@ class SegundaActivity : AppCompatActivity() {
     }
 
     private fun initClass() {
+        val user = intent.getStringExtra("user")
         binding.bottomNavigation.setOnItemSelectedListener { item ->
+            val bundle = Bundle()
+            bundle.putString("user", user)
             when (item.itemId) {
                 R.id.inicio -> {
+                    val firstFragment = FirstFragment()
+                    firstFragment.arguments = bundle
+
                     FragmentsManager().replaceFragment(
                         supportFragmentManager,
                         binding.frmContainer.id,
-                        FirstFragment()
+                        firstFragment
                     )
                     true
                 }
 
                 R.id.fav -> {
+                    val secondFragment = SecondFragment()
+                    secondFragment.arguments = bundle
                     FragmentsManager().replaceFragment(
                         supportFragmentManager,
                         binding.frmContainer.id,
-                        SecondFragment()
+                        secondFragment
                     )
                     true
                 }
 
                 R.id.api -> {
+                    val thirdFragment = ThirdFragment()
+                    thirdFragment.arguments = bundle
                     FragmentsManager().replaceFragment(
                         supportFragmentManager,
                         binding.frmContainer.id,
-                        ThirdFragment()
+                        thirdFragment
                     )
                     true
                 }

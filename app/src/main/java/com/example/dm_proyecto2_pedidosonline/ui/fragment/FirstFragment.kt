@@ -24,6 +24,7 @@ import com.example.dm_proyecto2_pedidosonline.Logic.marvelLogic.MarvelLogic
 import com.example.dm_proyecto2_pedidosonline.data.entities.marvel.MarvelChars
 import com.example.dm_proyecto2_pedidosonline.ui.activities.DetailsMarvelItem
 import com.example.dm_proyecto2_pedidosonline.ui.activities.dataStore
+import com.example.dm_proyecto2_pedidosonline.ui.adapters.FavoritosAdapter
 import com.example.dm_proyecto2_pedidosonline.ui.adapters.MarvelAdapter
 import com.example.dm_proyecto2_pedidosonline.ui.data.UserDataStore
 import com.example.dm_proyecto2_pedidosonline.ui.utilities.Metodos
@@ -48,12 +49,17 @@ class FirstFragment : Fragment() {
 
     private lateinit var gmanager: GridLayoutManager
 
-    private val limit =99
-    private var offset=0
+    private lateinit var favoritosAdapter: FavoritosAdapter
+
+    val min=1
+    val max=400
+
+    private val limit =(Math.random()*(max-min+1)).toInt()+min
+    private var offset=limit-99
 
     private var marvelCharacterItems: MutableList<MarvelChars> = mutableListOf()
 
-    private var rvAdapter: MarvelAdapter = MarvelAdapter { sendMarvelItems(it) }
+//    private var rvAdapter: MarvelAdapter = MarvelAdapter { sendMarvelItems(it) }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -72,12 +78,19 @@ class FirstFragment : Fragment() {
         gmanager = GridLayoutManager(
             requireActivity(), 2
         )
+        val user=arguments?.getString("user")
+        Log.d("Usuario", user.toString())
+        favoritosAdapter=FavoritosAdapter(user!!){
+            sendMarvelItems(it)
+        }
         return binding.root
     }
 
     override fun onStart() {
         super.onStart()
-
+        if (offset<0){
+            offset=0
+        }
         lifecycleScope.launch(Dispatchers.Main) {
             getDataStore().collect {user->
                 Log.d("UCE", user.email)
@@ -120,7 +133,7 @@ class FirstFragment : Fragment() {
 //                                withContext(Dispatchers.Main) {
 //                                    rvAdapter.updateListItems(newItems)
 //                                }
-                                rvAdapter.updateListItems(newItems)
+//                                rvAdapter.updateListItems(newItems)
                                 this@FirstFragment.offset+=offset
                             }
                         }
@@ -133,7 +146,7 @@ class FirstFragment : Fragment() {
                     items->
                 items.nombre.lowercase(). contains(filteredText.toString().lowercase())
             }
-            rvAdapter.replaceListAdapter(newItems)
+//            rvAdapter.replaceListAdapter(newItems)
         }
     }
 
@@ -154,9 +167,9 @@ class FirstFragment : Fragment() {
             } as MutableList<MarvelChars>
 
             Log.d("DATOS",marvelCharacterItems.size.toString())
-            rvAdapter.items = marvelCharacterItems
+            favoritosAdapter.items = marvelCharacterItems
             binding.rvMarvelChars.apply {
-                this.adapter = rvAdapter
+                this.adapter = favoritosAdapter
                 this.layoutManager = lmanager
             }
             this@FirstFragment.offset =offset+ limit
@@ -180,9 +193,9 @@ class FirstFragment : Fragment() {
                 }
                 Log.d("DATOS",marvelCharacterItems.size.toString())
 
-                rvAdapter.items = marvelCharacterItems
+                favoritosAdapter.items = marvelCharacterItems
                 binding.rvMarvelChars.apply {
-                    this.adapter = rvAdapter
+                    this.adapter = favoritosAdapter
                     //this.layoutManager = gmanager
                     this.layoutManager = lmanager
                 }

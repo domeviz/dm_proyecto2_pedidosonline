@@ -180,7 +180,9 @@ class MainActivity : AppCompatActivity() {
                         "Authentication success.",
                         Toast.LENGTH_SHORT,
                     ).show()
-                    startActivity(Intent(this,BiometricActivity::class.java))
+                    val intent = Intent(this, SegundaActivity::class.java)
+                    intent.putExtra("user", email)
+                    startActivity(intent)
 
                 } else {
                     // If sign in fails, display a message to the user.

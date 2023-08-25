@@ -26,7 +26,8 @@ fun Result.getMarvelChars(): MarvelChars {
         id,
         name,
         comic,
-        thumbnail.path +"."+ thumbnail.extension
+        thumbnail.path +"."+ thumbnail.extension,
+        ""
 //        ,description
 
     )

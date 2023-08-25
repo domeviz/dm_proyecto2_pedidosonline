@@ -24,6 +24,7 @@ class JikanAnimeLogic {
                     it.duration,
 //                    it.synopsis,
                     it.images.jpg.image_url,
+                    ""
 //                    it.rating
                 )
                 itemList.add(m)

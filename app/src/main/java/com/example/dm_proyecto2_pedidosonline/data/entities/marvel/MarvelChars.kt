@@ -10,7 +10,8 @@ data class MarvelChars(
     val nombre: String,
     val comic: String,
 //    val descripcion: String,
-    val imagen: String
+    val imagen: String,
+    var user:String
 ) : Parcelable
 fun MarvelChars.getMarvelCharsDB(): MarvelCharsDB {
     return MarvelCharsDB(

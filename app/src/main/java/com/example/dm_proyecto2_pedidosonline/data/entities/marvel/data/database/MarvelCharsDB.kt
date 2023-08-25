@@ -19,6 +19,7 @@ fun MarvelCharsDB.getMarvelChars(): MarvelChars {
         id,
         name,
         comic,
-        image
+        image,
+        ""
     )
 }
