@@ -4,56 +4,49 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:backgroundTint="@color/rosa"
-    tools:context=".ui.activities.MainActivity">
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toEndOf="@+id/marvel"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/marvel" />
-
-    <ImageView
-        android:id="@+id/marvel"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toStartOf="@+id/imageView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/scarletwitch" />
+    android:background="@color/celeste"
+    tools:context=".ui.activities.RegistrarseActivity">
 
     <TextView
-        android:id="@+id/titulo"
-        style="@style/styleTitulo"
+        android:id="@+id/registrar"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/marginStartEnd"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="71dp"
-        android:text="@string/titulo"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        android:text="@string/registrar"
+        android:textColor="@color/rosa4"
+        android:textSize="28dp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/saludo"
+        android:id="@+id/bienvenido"
         style="@style/styleTexto"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/marginStartEnd"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="71dp"
-        android:text="@string/saludo"
+        android:gravity="center"
+        android:text="@string/registro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titulo" />
+        app:layout_constraintTop_toBottomOf="@+id/registrar" />
+
+    <TextView
+        android:id="@+id/ingresa"
+        style="@style/styleTexto"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginStartEnd"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="71dp"
+        android:text="@string/ingresa1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imagenes" />
 
     <TextView
         android:id="@+id/correo"
@@ -61,12 +54,12 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="71dp"
         android:text="@string/correo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/saludo" />
+        app:layout_constraintTop_toBottomOf="@+id/ingresa" />
 
     <EditText
         android:id="@+id/correoEjemplo"
@@ -74,7 +67,7 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="71dp"
         android:backgroundTint="@color/white"
         android:ems="10"
@@ -86,17 +79,30 @@
         app:layout_constraintTop_toBottomOf="@+id/correo" />
 
     <TextView
+        android:id="@+id/ingresa2"
+        style="@style/styleTexto"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginStartEnd"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="71dp"
+        android:text="@string/ingresa2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/correoEjemplo" />
+
+    <TextView
         android:id="@+id/password"
         style="@style/styleSubtitulo"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="71dp"
         android:text="@string/password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/correoEjemplo" />
+        app:layout_constraintTop_toBottomOf="@+id/ingresa2" />
 
     <EditText
         android:id="@+id/correoPassword"
@@ -104,7 +110,7 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="71dp"
         android:backgroundTint="@color/white"
         android:ems="10"
@@ -159,29 +165,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/conectese" />
 
-    <TextView
-        android:id="@+id/olvidoPassword"
-        style="@style/styleTexto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <LinearLayout
+        android:id="@+id/imagenes"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="28dp"
-        android:text="@string/olvidoPassword"
-        android:textStyle="italic"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/google" />
+        app:layout_constraintTop_toTopOf="@id/bienvenido">
 
-    <Button
-        android:id="@+id/registrarse"
-        style="@style/styleSubtitulo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="14dp"
-        android:backgroundTint="@color/white"
-        android:text="@string/registrese"
-        android:textAllCaps="false"
-        app:layout_constraintStart_toEndOf="@+id/olvidoPassword"
-        app:layout_constraintTop_toBottomOf="@+id/google" />
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/spiderman" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/ironman" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

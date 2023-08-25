@@ -51,13 +51,9 @@ import com.google.firebase.ktx.Firebase
 import java.util.Locale
 import java.util.UUID
 
-// At the top level of your kotlin file:
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
 class MainActivity : AppCompatActivity() {
-
-    //TAG FORMA 1
-//    private const val TAG="UCE"
 
     private lateinit var binding: ActivityMainBinding
     //Ubicacion y GPS
@@ -124,12 +120,12 @@ class MainActivity : AppCompatActivity() {
         // Initialize Firebase Auth
         auth = Firebase.auth
 
-        binding.button.setOnClickListener {
-            authWithFirebaseEmail(
-                binding.correoEjemplo.text.toString(),
-                binding.correoPassword.text.toString()
-            )
-        }
+//        binding.button.setOnClickListener {
+//            authWithFirebaseEmail(
+//                binding.correoEjemplo.text.toString(),
+//                binding.correoPassword.text.toString()
+//            )
+//        }
 
         binding.botonIngresar.setOnClickListener {
             signWithFirebaseEmail(
@@ -138,10 +134,12 @@ class MainActivity : AppCompatActivity() {
             )
         }
 
-        binding.imageView.setOnClickListener {
-            recoveryPasswordWithEmail(
-                binding.correoEjemplo.text.toString()
-            )
+        binding.registrarse.setOnClickListener {
+            startActivity(Intent(this,RegistrarseActivity::class.java))
+        }
+
+        binding.olvidoPassword.setOnClickListener {
+            startActivity(Intent(this,RecuperarActivity::class.java))
         }
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
@@ -168,33 +166,6 @@ class MainActivity : AppCompatActivity() {
                 locationSettingRequest=LocationSettingsRequest.Builder()
                     .addLocationRequest(locationRequest).build()
 
-    }
-
-    private fun authWithFirebaseEmail(email:String,password:String){
-        auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d(Constants.TAG, "createUserWithEmail:success")
-
-                    Toast.makeText(
-                        baseContext,
-                        "Authentication success.",
-                        Toast.LENGTH_SHORT,
-                    ).show()
-
-                    val user = auth.currentUser
-
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w(Constants.TAG, "createUserWithEmail:failure", task.exception)
-                    Toast.makeText(
-                        baseContext,
-                        "Authentication failed.",
-                        Toast.LENGTH_SHORT,
-                    ).show()
-                }
-            }
     }
 
     private fun signWithFirebaseEmail(email:String, password:String) {
@@ -225,26 +196,6 @@ class MainActivity : AppCompatActivity() {
 
 
 
-    }
-
-    private fun recoveryPasswordWithEmail(email :  String){
-        auth.sendPasswordResetEmail(email)
-            .addOnCompleteListener{task->
-                if (task.isSuccessful){
-                    Toast.makeText(
-                        baseContext,
-                        "Correo de verificacion enviado",
-                        Toast.LENGTH_SHORT,
-                    ).show()
-
-                    MaterialAlertDialogBuilder(this).apply {
-                        setTitle("Alert")
-                        setMessage("Correo de recuperacion enviado correctamente")
-                        setCancelable(true)
-                    }.show()
-                }
-
-            }
     }
 
     override fun onStart() {
@@ -286,26 +237,6 @@ class MainActivity : AppCompatActivity() {
 //                ).show()
 //            }
 //        }
-
-        binding.btnSearchGoogle.setOnClickListener {
-
-            //Se importa el Android general
-            locationContract.launch(android.Manifest.permission.ACCESS_FINE_LOCATION)
-
-//            val intent = Intent(
-//                Intent.ACTION_WEB_SEARCH
-//            )
-//            intent.setClassName(
-//                "com.google.android.googlequicksearchbox",
-//                "com.google.android.googlequicksearchbox.SearchActivity"
-//            )
-//            intent.putExtra(
-//                SearchManager.QUERY,
-//                binding.correoEjemplo.text.toString()
-//            )
-//            startActivity(intent)
-
-        }
 
         val appResultLocal =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { resultActivity ->
@@ -394,22 +325,22 @@ class MainActivity : AppCompatActivity() {
 
             }
         //Las 2 activitys se van a comunicar y en base a eso se determina el appResultLocal
-        binding.btnResult.setOnClickListener {
-            val intentSpeech = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
-            intentSpeech.putExtra(
-                RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
-            )
-            intentSpeech.putExtra(
-                RecognizerIntent.EXTRA_LANGUAGE,
-                Locale.getDefault()
-            )
-            intentSpeech.putExtra(
-                RecognizerIntent.EXTRA_PROMPT,
-                "Di algo"
-            )
-            speechToText.launch(intentSpeech)
-        }
+//        binding.btnResult.setOnClickListener {
+//            val intentSpeech = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
+//            intentSpeech.putExtra(
+//                RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+//                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
+//            )
+//            intentSpeech.putExtra(
+//                RecognizerIntent.EXTRA_LANGUAGE,
+//                Locale.getDefault()
+//            )
+//            intentSpeech.putExtra(
+//                RecognizerIntent.EXTRA_PROMPT,
+//                "Di algo"
+//            )
+//            speechToText.launch(intentSpeech)
+//        }
     }
 
     private suspend fun saveDataStore(stringData: String) {
