@@ -51,15 +51,12 @@ class FirstFragment : Fragment() {
 
     private lateinit var favoritosAdapter: FavoritosAdapter
 
-    val min=1
-    val max=400
-
-    private val limit =(Math.random()*(max-min+1)).toInt()+min
-    private var offset=limit-99
+    private val limit = 99
+    private var offset = 0
 
     private var marvelCharacterItems: MutableList<MarvelChars> = mutableListOf()
 
-//    private var rvAdapter: MarvelAdapter = MarvelAdapter { sendMarvelItems(it) }
+    //    private var rvAdapter: MarvelAdapter = MarvelAdapter { sendMarvelItems(it) }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -78,9 +75,9 @@ class FirstFragment : Fragment() {
         gmanager = GridLayoutManager(
             requireActivity(), 2
         )
-        val user=arguments?.getString("user")
+        val user = arguments?.getString("user")
         Log.d("Usuario", user.toString())
-        favoritosAdapter=FavoritosAdapter(user!!){
+        favoritosAdapter = FavoritosAdapter(user!!) {
             sendMarvelItems(it)
         }
         return binding.root
@@ -88,11 +85,11 @@ class FirstFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        if (offset<0){
-            offset=0
+        if (offset < 0) {
+            offset = 0
         }
         lifecycleScope.launch(Dispatchers.Main) {
-            getDataStore().collect {user->
+            getDataStore().collect { user ->
                 Log.d("UCE", user.email)
                 Log.d("UCE", user.name)
                 Log.d("UCE", user.session)
@@ -106,10 +103,10 @@ class FirstFragment : Fragment() {
         )
         binding.spinner.adapter = adapter
 
-        chargeDataRV(limit,offset)
+        chargeDataRV(limit, offset)
 
         binding.rvSwipe.setOnRefreshListener {
-            chargeDataRV(limit,offset)
+            chargeDataRV(limit, offset)
             //chargeDataRVDB(offset,limit)
             binding.rvSwipe.isRefreshing = false
         }
@@ -127,24 +124,22 @@ class FirstFragment : Fragment() {
 //                            lifecycleScope.launch((Dispatchers.IO)) {
                             lifecycleScope.launch((Dispatchers.Main)) {
 //                                val newItems = MarvelLogic().getAllMarvelChars(0, 99)
-                                    val newItems = with(Dispatchers.IO){
-                                        MarvelLogic().getAllMarvelChars(offset, limit)
-                                    }
+                                val newItems = with(Dispatchers.IO) {
+                                    MarvelLogic().getAllMarvelChars(offset, limit)
+                                }
 //                                withContext(Dispatchers.Main) {
 //                                    rvAdapter.updateListItems(newItems)
 //                                }
 //                                rvAdapter.updateListItems(newItems)
-                                this@FirstFragment.offset+=offset
+                                this@FirstFragment.offset += offset
                             }
                         }
                     }
                 }
             })
-        binding.txtfilter.addTextChangedListener{
-                filteredText->
-            val newItems= marvelCharacterItems.filter {
-                    items->
-                items.nombre.lowercase(). contains(filteredText.toString().lowercase())
+        binding.txtfilter.addTextChangedListener { filteredText ->
+            val newItems = marvelCharacterItems.filter { items ->
+                items.nombre.lowercase().contains(filteredText.toString().lowercase())
             }
 //            rvAdapter.replaceListAdapter(newItems)
         }
@@ -156,25 +151,22 @@ class FirstFragment : Fragment() {
         startActivity(i);
     }
 
-    fun chargeDataRV(limit: Int,offset: Int) {
-
+    private fun chargeDataRV(limit: Int, offset: Int) {
         if (Metodos().isOnline(requireActivity())) {
-        lifecycleScope.launch(Dispatchers.Main) {
-            marvelCharacterItems = withContext(Dispatchers.IO) {
-                return@withContext (
-                        MarvelLogic().getAllMarvelChars(offset, limit))
-//                        JikanAnimeLogic().getAllAnimes ())
-            } as MutableList<MarvelChars>
+            lifecycleScope.launch(Dispatchers.Main) {
+                val allCharacters = MarvelLogic().getAllMarvelChars(offset, limit)
+                val shuffledCharacters = allCharacters.shuffled()
 
-            Log.d("DATOS",marvelCharacterItems.size.toString())
-            favoritosAdapter.items = marvelCharacterItems
-            binding.rvMarvelChars.apply {
-                this.adapter = favoritosAdapter
-                this.layoutManager = lmanager
+                marvelCharacterItems = shuffledCharacters as MutableList<MarvelChars>
+
+                favoritosAdapter.items = marvelCharacterItems
+                binding.rvMarvelChars.apply {
+                    this.adapter = favoritosAdapter
+                    this.layoutManager = lmanager
+                }
+                this@FirstFragment.offset = offset + limit
             }
-            this@FirstFragment.offset =offset+ limit
-        }
-        }else{
+        } else {
             Snackbar.make(
                 binding.cardView,
                 "No hay conexión",
@@ -182,35 +174,37 @@ class FirstFragment : Fragment() {
             ).show()
         }
     }
-        private fun chargeDataRVDB(limit: Int,offset: Int) {
-            lifecycleScope.launch(Dispatchers.Main) {
-                Log.d("DATOSNADA",marvelCharacterItems.size.toString())
 
-                marvelCharacterItems = withContext(Dispatchers.IO) {
-                    return@withContext (MarvelLogic().getAllCharsDB(offset,limit
+    private fun chargeDataRVDB(limit: Int, offset: Int) {
+        lifecycleScope.launch(Dispatchers.Main) {
+            Log.d("DATOSNADA", marvelCharacterItems.size.toString())
 
-                    ))
-                }
-                Log.d("DATOS",marvelCharacterItems.size.toString())
+            marvelCharacterItems = withContext(Dispatchers.IO) {
+                return@withContext (MarvelLogic().getAllCharsDB(
+                    offset, limit
 
-                favoritosAdapter.items = marvelCharacterItems
-                binding.rvMarvelChars.apply {
-                    this.adapter = favoritosAdapter
-                    //this.layoutManager = gmanager
-                    this.layoutManager = lmanager
-                }
-                this@FirstFragment.offset+=limit
+                ))
             }
+            Log.d("DATOS", marvelCharacterItems.size.toString())
 
+            favoritosAdapter.items = marvelCharacterItems
+            binding.rvMarvelChars.apply {
+                this.adapter = favoritosAdapter
+                //this.layoutManager = gmanager
+                this.layoutManager = lmanager
+            }
+            this@FirstFragment.offset += limit
         }
-    private fun getDataStore()= requireActivity().dataStore.data.map {
-            prefs->
+
+    }
+
+    private fun getDataStore() = requireActivity().dataStore.data.map { prefs ->
         UserDataStore(
-            name=prefs[stringPreferencesKey("usuario")].orEmpty(),
-            email=prefs[stringPreferencesKey("email")].orEmpty(),
-            session=prefs[stringPreferencesKey("session")].orEmpty()
+            name = prefs[stringPreferencesKey("usuario")].orEmpty(),
+            email = prefs[stringPreferencesKey("email")].orEmpty(),
+            session = prefs[stringPreferencesKey("session")].orEmpty()
         )
     }
-    }
+}
 
 

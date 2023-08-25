@@ -34,6 +34,13 @@ class FavoritosAdapter(private var user: String,
                 Snackbar.make(binding.root,"Se agregó a favoritos el personaje: ${item.nombre}",Snackbar.LENGTH_SHORT).show()
                 insertarFavorito(item,user)
             }
+            itemView.setOnClickListener {
+                fnClick(item)
+            }
+
+            binding.imgMarvel.setOnClickListener {
+                fnClick(item)
+            }
         }
 
         fun insertarFavorito(item: MarvelChars, user: String) {
