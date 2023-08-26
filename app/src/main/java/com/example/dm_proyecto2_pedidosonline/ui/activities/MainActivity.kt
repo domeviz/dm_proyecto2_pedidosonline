@@ -33,7 +33,12 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import androidx.lifecycle.ViewModelProvider
 import com.example.dm_proyecto2_pedidosonline.ui.utilities.MyLocationManager
+import com.example.dm_proyecto2_pedidosonline.ui.viewmodels.UserViewModel
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
@@ -46,15 +51,20 @@ import com.google.android.gms.location.Priority
 import com.google.android.gms.location.SettingsClient
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import java.util.Locale
 import java.util.UUID
+enum class ProviderType{
+    GOOGLE
+}
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
 class MainActivity : AppCompatActivity() {
 
+    private val GOOGLE_SIGN_IN= 100
     private lateinit var binding: ActivityMainBinding
     //Ubicacion y GPS
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
@@ -65,6 +75,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
 
     private var currentLocation: Location? = null
+
+    private lateinit var userViewModel: UserViewModel
 
     @SuppressLint("MissingPermission")
     val locationContract =
@@ -117,15 +129,23 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         // Initialize Firebase Auth
         auth = Firebase.auth
 
-//        binding.button.setOnClickListener {
-//            authWithFirebaseEmail(
-//                binding.correoEjemplo.text.toString(),
-//                binding.correoPassword.text.toString()
-//            )
-//        }
+        userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
+
+        val prefs =getSharedPreferences(getString(R.string.prefs_file),Context.MODE_PRIVATE).edit()
+        prefs.apply()
+
+        binding.google.setOnClickListener {
+            val googleConf=GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail().build()
+
+            val googleClient= GoogleSignIn.getClient(this,googleConf)
+            startActivityForResult(googleClient.signInIntent, GOOGLE_SIGN_IN)
+        }
 
         binding.botonIngresar.setOnClickListener {
             signWithFirebaseEmail(
@@ -358,5 +378,41 @@ class MainActivity : AppCompatActivity() {
         var location=MyLocationManager(this)
         location.getUserLocation()
 
+    }
+    
+    //Google
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == GOOGLE_SIGN_IN) {
+            // Manejar la respuesta de One Tap aquí
+            val task=GoogleSignIn.getSignedInAccountFromIntent(data)
+            val account=task.getResult(ApiException::class.java)
+            if(account!=null){
+                val credential= GoogleAuthProvider.getCredential(account.idToken,null)
+                FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener{
+                    if(it.isSuccessful){
+                        val user = FirebaseAuth.getInstance().currentUser
+                        val email = user?.email
+                        // Establecer el correo electrónico en el UserViewModel
+                        userViewModel.userLiveData.value = email
+                        Toast.makeText(
+                            baseContext,
+                            "Autenticación exitosa",
+                            Toast.LENGTH_SHORT,
+                        ).show()
+                        val intent = Intent(this, SegundaActivity::class.java)
+                        intent.putExtra("user", email)
+                        startActivity(intent)
+                    }else{
+                        Toast.makeText(
+                            baseContext,
+                            "No se pudo auteticar",
+                            Toast.LENGTH_SHORT,
+                        ).show()
+                    }
+                }
+            }
+
+        }
     }
 }

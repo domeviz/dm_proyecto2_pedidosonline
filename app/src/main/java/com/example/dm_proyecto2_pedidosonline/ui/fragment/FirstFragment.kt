@@ -12,6 +12,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.datastore.dataStore
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.dm_proyecto2_pedidosonline.R
@@ -28,6 +29,7 @@ import com.example.dm_proyecto2_pedidosonline.ui.adapters.FavoritosAdapter
 import com.example.dm_proyecto2_pedidosonline.ui.adapters.MarvelAdapter
 import com.example.dm_proyecto2_pedidosonline.ui.data.UserDataStore
 import com.example.dm_proyecto2_pedidosonline.ui.utilities.Metodos
+import com.example.dm_proyecto2_pedidosonline.ui.viewmodels.UserViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -56,6 +58,8 @@ class FirstFragment : Fragment() {
 
     private var marvelCharacterItems: MutableList<MarvelChars> = mutableListOf()
 
+    private lateinit var userViewModel: UserViewModel
+
     //    private var rvAdapter: MarvelAdapter = MarvelAdapter { sendMarvelItems(it) }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -80,11 +84,13 @@ class FirstFragment : Fragment() {
         favoritosAdapter = FavoritosAdapter(user!!) {
             sendMarvelItems(it)
         }
+        userViewModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
         return binding.root
     }
 
     override fun onStart() {
         super.onStart()
+        val user = userViewModel.userLiveData.value
         if (offset < 0) {
             offset = 0
         }
