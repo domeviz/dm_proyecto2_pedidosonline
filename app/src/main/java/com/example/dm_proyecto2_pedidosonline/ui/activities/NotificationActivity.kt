@@ -88,12 +88,12 @@ class NotificationActivity : AppCompatActivity() {
     @SuppressLint("MissingPermission")
     fun sendNotification(){
         val not = NotificationCompat.Builder(this, CHANNEL)
-        not.setContentTitle("Primera notificacion")
-        not.setContentText("Tienes una notificacion")
+        not.setContentTitle("Notificación Marvel")
+        not.setContentText("Recuerda entrar a la app")
         //El icono que se muestra en la barra de notificaciones
         not.setSmallIcon(R.drawable.baseline_favorite_24)
         //Imagen que aparece dentro de la notificacion
-        val bitmap: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.eva)
+        val bitmap: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.scarletwitch)
         not.setLargeIcon(bitmap)
         not.setPriority(NotificationCompat.PRIORITY_MAX)
         not.setStyle(NotificationCompat.BigTextStyle().bigText("Esta es una notificacion para recordar que estamos trabajando en android"))
