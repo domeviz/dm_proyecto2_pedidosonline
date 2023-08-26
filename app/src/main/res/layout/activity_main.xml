@@ -4,74 +4,112 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:background="@color/white"
+    android:backgroundTint="@color/rosa"
+    tools:context=".ui.activities.MainActivity">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/marvel"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_marginStart="105dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="106dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toEndOf="@+id/witch"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/marvel" />
+
+    <ImageView
+        android:id="@+id/witch"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toStartOf="@+id/marvel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo_edi" />
+        app:srcCompat="@drawable/scarletwitch" />
 
     <TextView
         android:id="@+id/titulo"
-        android:layout_width="wrap_content"
+        style="@style/styleTitulo"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="@dimen/marginStartEnd"
         android:layout_marginTop="15dp"
+        android:layout_marginEnd="71dp"
         android:text="@string/titulo"
         android:textSize="24sp"
-        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/marvel" />
 
     <TextView
         android:id="@+id/saludo"
-        android:layout_width="wrap_content"
+        style="@style/styleTexto"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="@dimen/marginStartEnd"
         android:layout_marginTop="15dp"
+        android:layout_marginEnd="71dp"
         android:text="@string/saludo"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titulo" />
 
     <TextView
         android:id="@+id/correo"
-        android:layout_width="wrap_content"
+        style="@style/styleSubtitulo"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="71dp"
         android:text="@string/correo"
-        android:textColor="@color/red"
-        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/saludo" />
 
     <EditText
         android:id="@+id/correoEjemplo"
+        style="@style/styleTexto"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="15dp"
+        android:layout_marginEnd="71dp"
+        android:backgroundTint="@color/white"
         android:ems="10"
         android:hint="@string/correoEjemplo"
         android:inputType="textPersonName"
+        android:textColorHint="#808080"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/correo" />
 
+    <TextView
+        android:id="@+id/password"
+        style="@style/styleSubtitulo"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="71dp"
+        android:text="@string/password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/correoEjemplo" />
+
     <EditText
-        android:id="@+id/editTextTextPassword"
+        android:id="@+id/correoPassword"
+        style="@style/styleTexto"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="15dp"
+        android:layout_marginEnd="71dp"
+        android:backgroundTint="@color/white"
         android:ems="10"
         android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password" />
 
@@ -81,76 +119,69 @@
         android:layout_height="50dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="20dp"
-        android:backgroundTint="@color/red"
+        android:layout_marginEnd="71dp"
+        android:backgroundTint="@color/rosa4"
         android:text="@string/botonIngresar"
         android:textAllCaps="false"
+        android:textColor="@color/white"
         app:cornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/correoPassword" />
 
     <TextView
         android:id="@+id/conectese"
-        android:layout_width="wrap_content"
+        style="@style/styleTexto"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="71dp"
         android:text="@string/conectese"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/botonIngresar" />
 
+    <Button
+        android:id="@+id/google"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="71dp"
+        android:backgroundTint="@color/white"
+        android:drawableLeft="@drawable/google30"
+        android:text="@string/google"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        app:cornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/conectese" />
+
     <TextView
         android:id="@+id/olvidoPassword"
+        style="@style/styleTexto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="28dp"
         android:text="@string/olvidoPassword"
+        android:textStyle="italic"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton6" />
+        app:layout_constraintTop_toBottomOf="@+id/google" />
 
-    <TextView
-        android:id="@+id/registrese"
+    <Button
+        android:id="@+id/registrarse"
+        style="@style/styleSubtitulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="89dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="14dp"
+        android:backgroundTint="@color/white"
         android:text="@string/registrese"
-        android:textColor="@android:color/holo_red_light"
-        android:textStyle="bold"
+        android:textAllCaps="false"
         app:layout_constraintStart_toEndOf="@+id/olvidoPassword"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton5" />
+        app:layout_constraintTop_toBottomOf="@+id/google" />
 
-    <TextView
-        android:id="@+id/password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/password"
-        android:textColor="@color/red"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/correoEjemplo" />
-
-    <ImageButton
-        android:id="@+id/imageButton5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="@color/white"
-        app:layout_constraintStart_toEndOf="@+id/imageButton6"
-        app:layout_constraintTop_toBottomOf="@+id/conectese"
-        app:srcCompat="@drawable/fblogin" />
-
-    <ImageButton
-        android:id="@+id/imageButton6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/conectese"
-        app:srcCompat="@drawable/twtlogin" />
 </androidx.constraintlayout.widget.ConstraintLayout>
