@@ -23,6 +23,7 @@ import com.example.dm_proyecto2_pedidosonline.Logic.jikanLogic.JikanAnimeLogic
 import com.example.dm_proyecto2_pedidosonline.Logic.lists.listItems
 import com.example.dm_proyecto2_pedidosonline.Logic.marvelLogic.MarvelLogic
 import com.example.dm_proyecto2_pedidosonline.data.entities.marvel.MarvelChars
+import com.example.dm_proyecto2_pedidosonline.ui.activities.BiometricActivity
 import com.example.dm_proyecto2_pedidosonline.ui.activities.DetailsMarvelItem
 import com.example.dm_proyecto2_pedidosonline.ui.activities.dataStore
 import com.example.dm_proyecto2_pedidosonline.ui.adapters.FavoritosAdapter
@@ -70,6 +71,7 @@ class FirstFragment : Fragment() {
             container,
             false
         )
+
         lmanager = LinearLayoutManager(
             requireActivity(),
             //Para cambiar de horizontal a vertical
@@ -107,7 +109,7 @@ class FirstFragment : Fragment() {
             R.layout.simple_spinner,
             names
         )
-        binding.spinner.adapter = adapter
+//        binding.spinner.adapter = adapter
 
         chargeDataRV(limit, offset)
 
@@ -143,12 +145,12 @@ class FirstFragment : Fragment() {
                     }
                 }
             })
-        binding.txtfilter.addTextChangedListener { filteredText ->
-            val newItems = marvelCharacterItems.filter { items ->
-                items.nombre.lowercase().contains(filteredText.toString().lowercase())
-            }
-//            rvAdapter.replaceListAdapter(newItems)
-        }
+//        binding.txtfilter.addTextChangedListener { filteredText ->
+//            val newItems = marvelCharacterItems.filter { items ->
+//                items.nombre.lowercase().contains(filteredText.toString().lowercase())
+//            }
+////            rvAdapter.replaceListAdapter(newItems)
+//        }
     }
 
     fun sendMarvelItems(item: MarvelChars) {

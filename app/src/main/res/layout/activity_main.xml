@@ -9,21 +9,21 @@
     tools:context=".ui.activities.MainActivity">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/marvel"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintStart_toEndOf="@+id/marvel"
+        app:layout_constraintStart_toEndOf="@+id/witch"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/marvel" />
 
     <ImageView
-        android:id="@+id/marvel"
+        android:id="@+id/witch"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toStartOf="@+id/imageView"
+        app:layout_constraintEnd_toStartOf="@+id/marvel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/scarletwitch" />
@@ -40,7 +40,7 @@
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/marvel" />
 
     <TextView
         android:id="@+id/saludo"

@@ -148,14 +148,14 @@
         app:layout_constraintTop_toTopOf="@id/bienvenido">
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/spider"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             app:srcCompat="@drawable/spiderman" />
 
         <ImageView
-            android:id="@+id/imageView4"
+            android:id="@+id/ironman"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

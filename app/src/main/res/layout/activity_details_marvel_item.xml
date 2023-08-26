@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="30dp"
             android:layout_marginEnd="5dp"
             android:fontFamily="@font/aclonica"
             android:gravity="center"
@@ -34,7 +34,7 @@
             android:id="@+id/imgPersonaje"
             android:layout_width="match_parent"
             android:layout_height="400dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="30dp"
             android:foregroundGravity="center"
             app:layout_constraintTop_toBottomOf="@+id/texto_centrado"
             tools:layout_editor_absoluteX="0dp"></ImageView>
@@ -43,7 +43,7 @@
             android:id="@+id/txt_Comic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="30dp"
             android:fontFamily="@font/aclonica"
             android:gravity="center"
             android:textSize="15sp"
@@ -65,35 +65,21 @@
             app:layout_constraintTop_toTopOf="@id/imgPersonaje"
             app:layout_constraintVertical_bias="0.9">
 
-            <TextView
-                android:id="@+id/txt_Descripcion"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="5dp"
-                android:fontFamily="@font/aclonica"
-                android:gravity="center"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_Comic" />
         </androidx.cardview.widget.CardView>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/favButton"
-            android:layout_width="62dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="36dp"
-            android:layout_marginBottom="24dp"
+        <TextView
+            android:id="@+id/txt_Descripcion"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="5dp"
+            android:fontFamily="@font/aclonica"
             android:gravity="center"
-            android:backgroundTint="@color/rosa"
-            android:src="@drawable/baseline_favorite_24"
-            app:fabSize="normal"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:ignore="SpeakableTextPresentCheck">
-
-        </com.google.android.material.floatingactionbutton.FloatingActionButton>
+            app:layout_constraintHorizontal_bias="0.433"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_Comic" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

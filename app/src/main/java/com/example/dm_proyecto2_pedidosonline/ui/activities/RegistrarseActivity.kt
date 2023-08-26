@@ -1,5 +1,6 @@
 package com.example.dm_proyecto2_pedidosonline.ui.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -29,9 +30,16 @@ class RegistrarseActivity : AppCompatActivity() {
                 binding.correoPassword.text.toString()
             )
         }
+        binding.spider.setOnClickListener {
+            startActivity(Intent(this,CameraActivity::class.java))
+        }
+        binding.ironman.setOnClickListener {
+            startActivity(Intent(this,ProgressActivity::class.java))
+        }
     }
 
     private fun authWithFirebaseEmail(email:String,password:String){
+        try{
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
@@ -40,7 +48,7 @@ class RegistrarseActivity : AppCompatActivity() {
 
                     Toast.makeText(
                         baseContext,
-                        "Authentication success.",
+                        "Autenticación exitosa",
                         Toast.LENGTH_SHORT,
                     ).show()
 
@@ -51,10 +59,17 @@ class RegistrarseActivity : AppCompatActivity() {
                     Log.w(Constants.TAG, "createUserWithEmail:failure", task.exception)
                     Toast.makeText(
                         baseContext,
-                        "Authentication failed.",
+                        "Autenticación fallida",
                         Toast.LENGTH_SHORT,
                     ).show()
                 }
             }
+        } catch (e: Exception) {
+            Toast.makeText(
+                baseContext,
+                "Acceso failed.",
+                Toast.LENGTH_SHORT,
+            ).show()
+        }
     }
 }

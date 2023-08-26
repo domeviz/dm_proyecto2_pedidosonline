@@ -25,7 +25,7 @@ class CameraActivity : AppCompatActivity() {
         binding.imgCapture.setOnClickListener{
             //Intent para compartir
             val shareIntent=Intent(Intent.ACTION_SEND)
-            shareIntent.putExtra(Intent.EXTRA_TEXT,"Hola como estas")
+            shareIntent.putExtra(Intent.EXTRA_TEXT,"¡Hola Marvel Fan!")
             shareIntent.setType("text/plain")
             //Como no sabemos a quien compartir creamos un Chooser para escoger la app
             startActivity(

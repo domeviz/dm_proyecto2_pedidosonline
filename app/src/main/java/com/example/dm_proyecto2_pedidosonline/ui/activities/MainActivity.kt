@@ -5,16 +5,11 @@ import android.annotation.SuppressLint
 import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
-import android.location.Geocoder
 import android.location.Location
-import android.net.Uri
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Looper
-import android.provider.Settings
 import android.speech.RecognizerIntent
-import com.example.dm_proyecto1_foodapp.Logic.validator.LoginValidator
 import com.example.dm_proyecto2_pedidosonline.R
 import com.example.dm_proyecto2_pedidosonline.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar
@@ -22,13 +17,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult.*
-import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AlertDialog
-import androidx.core.content.PermissionChecker.PermissionResult
 import androidx.datastore.core.DataStore
-import androidx.lifecycle.lifecycleScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
@@ -49,12 +38,10 @@ import com.google.android.gms.location.LocationSettingsRequest
 import com.google.android.gms.location.LocationSettingsStatusCodes
 import com.google.android.gms.location.Priority
 import com.google.android.gms.location.SettingsClient
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import java.util.Locale
 import java.util.UUID
 enum class ProviderType{
     GOOGLE
@@ -147,6 +134,14 @@ class MainActivity : AppCompatActivity() {
             startActivityForResult(googleClient.signInIntent, GOOGLE_SIGN_IN)
         }
 
+        binding.witch.setOnClickListener{
+            startActivity(Intent(this,NotificationActivity::class.java))
+        }
+
+        binding.marvel.setOnClickListener {
+            startActivity(Intent(this,BiometricActivity::class.java))
+        }
+
         binding.botonIngresar.setOnClickListener {
             signWithFirebaseEmail(
                 binding.correoEjemplo.text.toString(),
@@ -189,6 +184,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun signWithFirebaseEmail(email:String, password:String) {
+        try{
         auth.signInWithEmailAndPassword (email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
@@ -215,7 +211,13 @@ class MainActivity : AppCompatActivity() {
 
                 }
             }
-
+        } catch (e: Exception) {
+            Toast.makeText(
+                baseContext,
+                "Ingresa las credenciales",
+                Toast.LENGTH_SHORT,
+            ).show()
+        }
 
 
     }
@@ -235,30 +237,6 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("MissingPermission")
     private fun initClass() {
-//        binding.botonIngresar.setOnClickListener {
-//            val check = LoginValidator().checkLogin(
-//                binding.correoEjemplo.text.toString(),
-//                binding.correoPassword.text.toString()
-//            )
-//            if (check) {
-//                lifecycleScope.launch(Dispatchers.IO) {
-//                    saveDataStore(binding.correoEjemplo.text.toString())
-//                }
-//                var intent = Intent(
-//                    this, SegundaActivity::class.java
-//                )
-//                try {
-//                    startActivity(intent)
-//                } catch (e: Exception) {
-//                    Log.d("UCE", "Falló")
-//                }
-//            } else {
-//                Snackbar.make(
-//                    binding.correoEjemplo, "Usuario y contraseña invalidos",
-//                    Snackbar.LENGTH_LONG
-//                ).show()
-//            }
-//        }
 
         val appResultLocal =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { resultActivity ->

@@ -1,5 +1,6 @@
 package com.example.dm_proyecto2_pedidosonline.ui.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -28,6 +29,9 @@ class RecuperarActivity : AppCompatActivity() {
             recoveryPasswordWithEmail(
                 binding.correoEjemplo.text.toString()
             )
+        }
+        binding.drstrange.setOnClickListener {
+            startActivity(Intent(this,ResultActivity::class.java))
         }
     }
 
